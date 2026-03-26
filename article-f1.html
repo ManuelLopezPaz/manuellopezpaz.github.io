@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The 3-Second Decision — Manuel Lopez Paz</title>
+  <meta name="description" content="What F1 strategy actually is — and why a good decision can lead to a bad outcome." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Loading Screen ──────────────────────────────────── -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-dots">
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+    </div>
+    <p class="loader-text">Just a moment.</p>
+  </div>
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <span class="nav-brand">Manuel Lopez Paz</span>
+    <div class="nav-meta" aria-hidden="true">
+      <span class="nav-meta-line">Manuel's Notes</span>
+      <span class="nav-meta-line">Analysis</span>
+    </div>
+    <div class="nav-github-center"></div>
+    <div class="nav-external">
+      <a href="mailto:imanuellopezpaz@gmail.com" class="nav-ext-link">Email</a>
+      <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="nav-ext-link">LinkedIn</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <div class="notes-back-row">
+      <a href="index.html" class="notes-back-link">← <span class="notes-back-text">Back</span></a>
+    </div>
+
+    <div class="project-page">
+
+      <p class="project-page-eyebrow">Analysis · 2025</p>
+      <h1 class="project-page-title">The 3-Second Decision</h1>
+      <p class="project-page-subtitle">What F1 Strategy Actually Is</p>
+
+      <div class="article">
+
+        <p>On the 57th lap of the 2021 Abu Dhabi Grand Prix, Lewis Hamilton was leading the Formula One World Championship finale by roughly eleven seconds. He was on worn tyres that had already covered 43 laps. Max Verstappen, his only rival for the title, was directly behind him on fresh rubber after a pit stop. Five laps to go. Hamilton had not pitted. Mercedes had decided that the track position advantage was worth more than the tyre disadvantage.</p>
+        <p>On a normal lap, an eleven-second gap is virtually impossible to close in five laps. The model said stay out.</p>
+        <p>What the model did not account for was that a safety car would appear with two laps remaining, erasing the gap to zero, and that race direction would make a contested decision allowing lapped cars to move aside, putting Verstappen directly behind Hamilton with one lap left on tyres that were 43 laps fresher. Hamilton lost the race, the championship, and started a controversy that is still being argued about.</p>
+        <p>This piece is not about the controversy. It is about the decision, and what it reveals when you examine it the way a strategist would: not as a question of who was right or wrong, but as a question of what information was available, what could reasonably be predicted, and whether the decision itself was the right one even though the outcome was not.</p>
+
+        <h2>The question that repeats every lap</h2>
+        <p>Every lap of a Formula One race, the strategy team is asking a version of the same question: is it worth pitting now, or better to stay out one more lap?</p>
+        <p>A pit stop costs roughly 22 to 24 seconds — the time spent slowing down, stopping, having four tyres changed by a crew of around 20 people, and rejoining. Those seconds are gone and cannot be recovered. In exchange, the driver gets fresh tyres, which are faster. The question is whether the time you gain on fresh tyres over the remaining laps is worth the time you lost in the pit lane.</p>
+        <p>That question has a clean answer when the future is known. It does not have a clean answer when it is not. And in F1, the future is almost never known.</p>
+
+        <h2>Tyres and the cost of staying out too long</h2>
+        <p>Tyres do not wear evenly. A soft compound — the fastest but least durable — might perform near its peak for fifteen laps and then start losing performance fairly sharply as the rubber breaks down. A harder compound is slower to start but holds up better over a longer stint. The right moment to pit sits somewhere between going too early, before you have gotten the most out of the current set, and going too late, after degradation is already costing you more per lap than a stop would.</p>
+        <p>Strategy engineers build degradation models to track this — essentially a forecast of how much slower the car will be on each additional lap of a given tyre. These models are built from practice data, historical records for the circuit, temperature readings from the tyres, and the lap times coming in during the race. They are updated continuously as new information arrives.</p>
+        <p>The tricky part is what sometimes happens toward the end of a tyre's life: a relatively rapid drop in performance that can persist over many laps. If a driver is losing a second or more per lap through that phase across ten or fifteen laps, the accumulated time loss starts approaching the cost of a stop that was never made. Knowing when that phase is about to begin — not after it has already started — is one of the harder things the model has to do.</p>
+
+        <h2>The variables nobody can predict</h2>
+        <p>If tyre wear were the only thing to worry about, strategy would be hard but manageable. The problem is that three other things can change the calculation in ways that are genuinely unknowable at the time the decision has to be made.</p>
+        <p>The first is the safety car. When there is an incident on track, a safety car is deployed and gaps between all cars are neutralised. Pitting during a safety car period is essentially a free stop — the time cost drops significantly because the whole field is slowed down. Historical data suggests safety cars appear in a meaningful percentage of races, but nobody knows when or whether one will come in any given race.</p>
+        <p>The second is what rivals do. If the car ahead pits, the team behind has to decide immediately: follow them in, or stay out and try to build enough of a gap to emerge ahead after their own stop later? The right answer depends on tyre conditions, the performance difference between compounds, and how much traffic the rival will encounter on their fresh tyres. It changes in real time.</p>
+        <p>The third is weather. A sudden change in conditions — a light shower, a track that starts drying unexpectedly — can make the entire tyre strategy obsolete in a few minutes. Getting the timing wrong on a switch to wet tyres can mean losing huge amounts of time or worse.</p>
+        <p>These three things do not combine neatly. A safety car in light rain while the car ahead has just pitted triggers a completely different set of calculations than any of those events in isolation. The strategy team's job is not to predict any of them with certainty. It is to assign reasonable probabilities, weigh up the options, and make the call that looks best given what they know.</p>
+
+        <h2>The undercut and the overcut</h2>
+        <p>Two moves define modern F1 strategy, and both illustrate how this kind of decision-making works in practice.</p>
+        <p>The undercut: you are behind another car. You pit first, get fresh tyres, and use the extra pace to close down the gap and hopefully emerge ahead when the other car eventually pits. It is a bet that tyre performance advantage will beat track position advantage.</p>
+        <p>The overcut runs the logic in reverse. You stay out after the other car pits. They are now on fresh tyres but stuck behind slower traffic. You, running in clear air on older tyres, try to build a gap large enough that when you eventually pit, you rejoin ahead. It only works if traffic is dense enough to slow them down.</p>
+        <p>Neither move is obviously the right call. The undercut works if your tyre advantage per lap is large enough over a long enough window. The overcut works if traffic conditions cooperate. Both depend on what the rival decides, which in turn depends on what they expect you to do. Races between two closely matched cars are often decided by which team reads the situation slightly better, slightly earlier.</p>
+
+        <h2>When the model fails</h2>
+        <p>Back to Abu Dhabi. Mercedes' decision to keep Hamilton out was not reckless. They had the same safety car probability data every team has. They made a defensible calculation that track position in a race where overtaking was very difficult was worth more than Verstappen's tyre advantage, which on most laps would not be enough to close an eleven-second gap in five laps. On most circuits, in most races, that would have been the right call.</p>
+        <p>What broke the model was not the safety car itself. Safety cars are in every team's model. What broke it was the specific sequence of decisions made under time pressure by race direction in circumstances that were genuinely unusual, producing a one-lap sprint to the finish on equal terms — something the model had not seriously considered as a realistic scenario.</p>
+        <p>This is the difference between a forecasting error and something harder to account for. A forecasting error is when your model assigns the wrong probability to an event it has considered. What happened at Abu Dhabi was closer to a scenario the model had not seriously considered — not because anyone was careless, but because it had not happened before in quite that way.</p>
+        <p>This is not a reason to stop using models. It is a reason to understand what models can and cannot do. A good model does not claim to predict the future. It claims to structure decisions in a way that tends to produce good outcomes over many repetitions. The Abu Dhabi call was arguably the right one in most versions of that race. It happened to be the version where it was not.</p>
+
+        <h2>The numbers behind the spectacle</h2>
+        <p>Modern F1 teams use simulation tools that run a race model repeatedly with slightly different inputs — different safety car timings, different rival decisions, different degradation rates — to build a picture of how different strategic choices are likely to play out across a range of possible futures. The output is not a single answer. It is a range of answers, from which the team can read not just which option looks best on average but how much risk each option carries.</p>
+        <p>This distinction matters. A strategy that produces a third-place finish most of the time but occasionally leads to a retirement is a very different bet from one that reliably produces fourth. Which one is better depends entirely on what the team needs from the race — a big points haul to close a championship gap, or a safe accumulation with no risk. The model has to be told what the priority is before it can say what to do.</p>
+        <p>A pit stop takes about three seconds from when the car stops to when it leaves. Those three seconds are the result of weeks of simulation, hours of pre-race preparation, and a decision process that runs continuously for the entire race without stopping.</p>
+        <p>Abu Dhabi 2021 is remembered as a controversy. It is also one of the cleaner illustrations available of why a good decision can lead to a bad outcome, and why confusing the quality of a decision with the quality of its result is a mistake worth learning to avoid.</p>
+
+      </div><!-- /article -->
+
+    </div><!-- /project-page -->
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-upper">
+      <div class="footer-left">
+        <p class="footer-contact-label">Contact</p>
+        <div class="footer-contact-rows">
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Work</span>
+            <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="footer-contact-link">LinkedIn</a>
+          </div>
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Info</span>
+            <a href="resume.pdf" target="_blank" rel="noopener" class="footer-contact-link">CV</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:imanuellopezpaz@gmail.com" class="footer-contact-link">Reach Out!</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-bottom-text">Made with love &amp; late-night mate 🧉</p>
+      <p class="footer-copy">© 2025 Manuel Lopez Paz</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+
+  <!-- ── Page-specific styles — loaded last to override style.css ── -->
+  <style>
+    .nav-github-center { justify-self: center; }
+
+    .notes-back-row {
+      position: fixed;
+      top: 88px;
+      left: var(--pad-h);
+      padding: 0;
+      z-index: 90;
+    }
+
+    .project-page {
+      max-width: 1400px !important;
+      margin: 0 auto !important;
+      padding: 0 var(--pad-h) 140px !important;
+    }
+    .article { max-width: 860px !important; margin: 0 !important; }
+
+    .project-page-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 18px;
+      margin-top: 80px;
+    }
+    .project-page-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #ffffff !important;
+      margin-bottom: 12px;
+    }
+    .project-page-subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 48px;
+    }
+
+    .article h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff !important;
+      margin: 64px 0 16px;
+      letter-spacing: -0.01em;
+    }
+    .article h3 {
+      font-size: 11px;
+      font-weight: 600;
+      color: #555;
+      margin: 40px 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .article p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #aaa !important;
+      margin-bottom: 24px;
+    }
+    .article p strong { color: #ffffff; font-weight: 600; }
+  </style>
+</body>
+</html>

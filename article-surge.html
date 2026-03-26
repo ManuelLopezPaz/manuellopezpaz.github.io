@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Does Your Ride Cost More in the Rain? — Manuel Lopez Paz</title>
+  <meta name="description" content="Surge pricing, two-sided markets, and the algorithm sitting in the middle of a negotiation it cannot win." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Loading Screen ──────────────────────────────────── -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-dots">
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+    </div>
+    <p class="loader-text">Just a moment.</p>
+  </div>
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <span class="nav-brand">Manuel Lopez Paz</span>
+    <div class="nav-meta" aria-hidden="true">
+      <span class="nav-meta-line">Manuel's Notes</span>
+      <span class="nav-meta-line">Analysis</span>
+    </div>
+    <div class="nav-github-center"></div>
+    <div class="nav-external">
+      <a href="mailto:imanuellopezpaz@gmail.com" class="nav-ext-link">Email</a>
+      <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="nav-ext-link">LinkedIn</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <div class="notes-back-row">
+      <a href="index.html" class="notes-back-link">← <span class="notes-back-text">Back</span></a>
+    </div>
+
+    <div class="project-page">
+
+      <p class="project-page-eyebrow">Analysis · 2025</p>
+      <h1 class="project-page-title">Why Does Your Ride Cost More in the Rain?</h1>
+      <p class="project-page-subtitle">Surge pricing, two-sided markets, and the algorithm in the middle</p>
+
+      <div class="article">
+
+        <p>It is raining. You open Uber. The fare is higher than usual and the wait is four minutes. You open Cabify. Normal price but the wait is twenty-eight minutes. You open DiDi. Higher price than usual. You consider the bus.</p>
+        <p>This happens constantly in Buenos Aires, and the usual response is mild irritation followed by compliance. But there are genuinely interesting questions buried in that moment. Why is Uber charging more than Cabify? How does Uber decide what price to charge? Why are two platforms looking at the exact same problem — it is raining, demand is high, supply is constrained — and giving completely different answers?</p>
+        <p>The short answer is that each platform is trying to solve the problem differently. And to understand why, it helps to understand what the problem actually is.</p>
+
+        <h2>The reason taxis disappeared when it rained</h2>
+        <p>Before ride-hailing, most cities had regulated taxi fares — a fixed price per kilometre set by local government that never changed. This created a predictable and very frustrating pattern: taxis vanished exactly when you needed them most. Rainy evenings. New Year's Eve. The fifteen minutes after a concert ended.</p>
+        <p>The reason is simple. A price set for a quiet Monday morning is too low for a busy Friday night. At that price, more people want rides than drivers are willing to provide. Some drivers simply do not bother going out when the fare does not justify it. A queue forms and nobody is moving.</p>
+        <p>The idea behind surge pricing is straightforward: let the price rise until things balance out. When the fare goes up, two things happen at the same time. Some riders decide it is too expensive and choose to walk, take public transport, or wait — so demand falls. Some drivers who were about to go home decide the extra money is worth staying — so supply rises. At the right price, the market clears.</p>
+        <p>This is not a new idea. It is basic supply and demand. What is new is having the computing power to do it in real time, across an entire city, updated every few minutes.</p>
+
+        <h2>The part nobody talks about: the city is not a single point</h2>
+        <p>The supply and demand logic works cleanly on a diagram. Real cities are messier.</p>
+        <p>Demand does not appear uniformly across a city. At 8am on a weekday it concentrates near residential areas. At 2am on Saturday it peaks around bars and restaurants. Drivers try to position themselves where demand is highest but their predictions are imperfect and their movement takes time. By the time a driver crosses the city to reach a high demand area, ten other drivers may have had the same idea and the demand has already cleared. Now they are all stuck far from where the next wave is forming.</p>
+        <p>A good pricing algorithm has to account for this — not just the current imbalance, but where things are likely to move in the next twenty minutes. That is a considerably harder problem than the diagram implies.</p>
+
+        <h2>The platform is sitting in the middle of a negotiation it cannot win</h2>
+        <p>Here is what makes this problem genuinely hard: there are two groups of customers, not one.</p>
+        <p>Riders want low prices and short waits. Drivers want high earnings and steady demand. The platform sits in the middle, taking a commission from every trip, and its job is to keep both sides happy enough to stay. These interests are only partially aligned.</p>
+        <p>Raise the price too much and riders leave. Demand collapses and drivers earn less even though the per-trip fare is higher because there are fewer trips. Cut the price to attract riders and supply dries up. Wait times increase and the platform's reputation suffers. Every pricing decision is a bet on where the tolerance limits of each side sit.</p>
+        <p>This is also why platforms spent billions offering cheap rides to attract riders and bonuses to attract drivers in their early years. It was not financial mismanagement. It was the cost of building something where both sides need to exist before either side finds it useful.</p>
+
+        <h2>What the price increase actually means</h2>
+        <p>The higher fare is the output of a real-time calculation. The algorithm is doing something like this: looking at how many ride requests are coming in per area, how many drivers are idle nearby, and what demand typically looks like at this time on a day like this. Then it picks a price adjustment that pushes supply and demand toward balance.</p>
+        <p>There are also constraints it has to respect. The price needs to cover driver earnings above a certain floor. It should not rise so high that riders switch to a competitor. The surge should be targeted enough to draw supply from nearby areas rather than triggering a city-wide scramble that makes things worse.</p>
+        <p>What surprised me most when I looked into this was a detail about how the incentive is structured. Early surge pricing multiplied the base fare by a fixed number. This created a perverse incentive where drivers would decline short trips during high demand periods, waiting for a longer one since the multiplier applied to both equally. Some platforms shifted to adding a flat bonus per trip instead, making the incentive about time worked rather than distance. It is a small change that fixes a real problem and the kind of thing that is only obvious once you think carefully about what behaviour the algorithm is actually creating.</p>
+
+        <h2>Same rain, different prices</h2>
+        <p>One of the more instructive things about surge pricing is that different platforms, operating in the same city during the same rain, produce different prices. Uber responds aggressively. Cabify holds a fixed price and accepts the longer wait. DiDi operates with lower commissions and different incentives for drivers, which shapes how it responds to demand spikes. Each platform has made different choices about what it is trying to achieve and those choices show up directly in what you see on your screen.</p>
+        <p>This is not a coincidence or a bug. Different apps prioritise different things. Some optimise for availability, others for price stability, others for driver earnings. The diversity of approaches is itself interesting. It shows there is no single right answer to the problem, just different trade-offs.</p>
+
+        <h2>What the algorithm gets wrong, or at least what is worth questioning</h2>
+        <p>Surge pricing has real critics, and some of the criticism has genuine substance beyond "it is expensive."</p>
+        <p>The most serious is about who gets served. When price determines who gets a ride, the people most likely to be left out are those who can least afford the premium. A worker commuting to an early shift does not have the option of waiting for the price to drop. The algorithm has no way of knowing, or caring, who is asking.</p>
+        <p>These questions go beyond engineering. Who gets served, at what price, under what conditions — those are not purely technical decisions. They are ethical and political ones too. Each platform makes its own choices about where it stands on these questions, which is part of why the same rain produces different prices across different apps.</p>
+        <p>It is also worth noting that there is an open debate about whether surge actually brings more drivers to the road or mostly just makes fewer people ask for rides because the price is too high. If it is mostly the second, the benefit is smaller than it appears. The research is ongoing and the honest answer is that nobody is completely sure yet.</p>
+
+        <h2>The answer depends on what you are trying to maximise</h2>
+        <p>The algorithm is not broken. It is doing exactly what it was designed to do. The more interesting question is whether what it was designed to do is what we actually want, and different platforms have answered that question differently.</p>
+        <p>These are not purely engineering problems. They are design choices that reflect priorities, and it is legitimate to think carefully about what those priorities should be. The debate is open and genuinely interesting.</p>
+        <p>The next time you are waiting in the rain for your ride, you have an interesting story to tell whoever is waiting with you.</p>
+
+      </div><!-- /article -->
+
+    </div><!-- /project-page -->
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-upper">
+      <div class="footer-left">
+        <p class="footer-contact-label">Contact</p>
+        <div class="footer-contact-rows">
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Work</span>
+            <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="footer-contact-link">LinkedIn</a>
+          </div>
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Info</span>
+            <a href="resume.pdf" target="_blank" rel="noopener" class="footer-contact-link">CV</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:imanuellopezpaz@gmail.com" class="footer-contact-link">Reach Out!</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-bottom-text">Made with love &amp; late-night mate 🧉</p>
+      <p class="footer-copy">© 2025 Manuel Lopez Paz</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+
+  <!-- ── Page-specific styles — loaded last to override style.css ── -->
+  <style>
+    .nav-github-center { justify-self: center; }
+
+    .notes-back-row {
+      position: fixed;
+      top: 88px;
+      left: var(--pad-h);
+      padding: 0;
+      z-index: 90;
+    }
+
+    .project-page {
+      max-width: 1400px !important;
+      margin: 0 auto !important;
+      padding: 0 var(--pad-h) 140px !important;
+    }
+    .article { max-width: 860px !important; margin: 0 !important; }
+    .project-page-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 18px;
+      margin-top: 80px;
+    }
+    .project-page-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #ffffff !important;
+      margin-bottom: 12px;
+    }
+    .project-page-subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 48px;
+    }
+
+    .article h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff !important;
+      margin: 64px 0 16px;
+      letter-spacing: -0.01em;
+    }
+    .article h3 {
+      font-size: 11px;
+      font-weight: 600;
+      color: #555;
+      margin: 40px 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .article p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #aaa !important;
+      margin-bottom: 24px;
+    }
+    .article p strong { color: #ffffff; font-weight: 600; }
+  </style>
+</body>
+</html>

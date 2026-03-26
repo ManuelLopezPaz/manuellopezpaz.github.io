@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Does the Football Transfer Market Reward Performance or Potential? — Manuel Lopez Paz</title>
+  <meta name="description" content="OLS regression analysis of La Liga player market values using xG and performance data, 2014–2024." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Loading Screen ──────────────────────────────────── -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-dots">
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+    </div>
+    <p class="loader-text">Just a moment.</p>
+  </div>
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+
+    <!-- Col 1: Name -->
+    <span class="nav-brand">Manuel Lopez Paz</span>
+
+    <!-- Col 2: Location / Role -->
+    <div class="nav-meta" aria-hidden="true">
+      <span class="nav-meta-line">Does the Transfer Market</span>
+      <span class="nav-meta-line">Reward Potential?</span>
+    </div>
+
+    <!-- Col 3: GitHub Repo — centered in 1fr column -->
+    <div class="nav-github-center">
+      <a href="https://github.com/ManuelLopezPaz/laliga-market-value-analysis"
+         target="_blank" rel="noopener" class="nav-ext-link">Github Repo</a>
+    </div>
+
+    <!-- Col 4: External links -->
+    <div class="nav-external">
+      <a href="mailto:imanuellopezpaz@gmail.com" class="nav-ext-link">Email</a>
+      <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="nav-ext-link">LinkedIn</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
+    </div>
+
+  </nav>
+
+  <main>
+    <div class="notes-back-row">
+      <a href="index.html" class="notes-back-link">← <span class="notes-back-text">Back</span></a>
+    </div>
+
+    <div class="writeup-layout">
+      <div class="writeup-main">
+        <div class="project-page">
+
+          <p class="project-page-eyebrow">La Liga · 2014–2024 · Statistical Analysis</p>
+          <h1 class="project-page-title">Does the Football Transfer Market Reward Performance or Potential?</h1>
+          <p class="project-page-subtitle">A La Liga Analysis Using xG and Market Value Data</p>
+
+          <p class="writeup-intro">Using data from 2,679 player-seasons across eleven La Liga seasons, I built four OLS regression models to test whether the transfer market rewards underlying performance or just results. The most surprising finding had nothing to do with xG.</p>
+
+          <div class="article">
+
+            <h2 id="intro">1. Introduction</h2>
+            <p>Football transfers are one of the most talked about topics in modern sport. Every summer, clubs spend hundreds of millions of euros on players. But what exactly are they paying for? Are they paying for what a player has already done, or for what he might do in the future?</p>
+            <p>Watching La Liga, I kept noticing a gap between how dangerous certain players looked and how many goals they actually scored. Isaac Romero at Sevilla in 2023/24 is a good example. His expected goals per 90 minutes was 0.774, which is elite level, but he only converted at 0.334 goals per 90. Someone looking only at the goal tally might question his €18 million valuation. But his xG suggested the chances were real, even if the finishing was not. The market seemed to see something the raw numbers did not show. That is what got me thinking about this project.</p>
+            <p>I wanted to know whether on-pitch performance actually predicts market value in La Liga, and more specifically, whether the market rewards underlying performance quality measured by expected goals (xG) or just results. Expected goals assigns a probability between 0 and 1 to each shot based on things like distance, angle, and assist type. A shot worth 0.3 xG means a typical player would score it 30% of the time. So xG per 90 minutes measures how many goals a player should be scoring based on chance quality, not just whether he converts them.</p>
+            <p>In my first project I used shots on target as a rough proxy for xG because that dataset did not include expected goals data. This project uses xG directly, which made it possible to properly test the question. Using data scraped from understat.com and market valuations from Transfermarkt covering 2,679 player-seasons across eleven La Liga seasons from 2014 to 2024, I built four OLS regression models with log-transformed market value as the outcome. The analysis looks at two things: does xG predict market value better than raw goals, and which performance metrics matter most for player valuation in La Liga? The answer to the first question turned out to be more nuanced than I expected. And the most surprising result had nothing to do with xG at all.</p>
+
+            <h2 id="data">2. Data</h2>
+            <p>I used two data sources for this project: understat.com for on-pitch performance metrics, and Transfermarkt for market valuations. The performance data was scraped directly from understat.com using Python's requests and json libraries. Understat tracks every shot in La Liga and assigns each one an xG value based on shot location, angle, and assist type. I collected player-level statistics for all eleven seasons from 2014/15 to 2024/25. The resulting dataset has 6,192 player-season observations with variables including xG, expected assists (xA), goals, assists, shots, key passes, minutes played, and position.</p>
+            <p>For market valuations I used a publicly available Transfermarkt dataset on Kaggle (davidcariboo/player-scores). I downloaded three files from it: one with historical market value snapshots, one with player attributes including date of birth, and one with competition codes to filter down to La Liga. For each player and season I kept only the last recorded valuation of that year.</p>
+            <p>Merging the two datasets meant matching player names across sources. Names are sometimes spelled differently because of accents or abbreviations, so I standardised everything to lowercase and checked the cases that did not line up. Most matched without issues — 97% matched exactly, which made the merge much cleaner than I anticipated.</p>
+            <p>After merging I applied three filters. Players with market values below €500,000 were removed because those valuations tend to be symbolic entries for fringe squad players. Players with fewer than 450 minutes played were excluded because per-90 metrics get unreliable with very little playing time. Goalkeepers were removed entirely since xG and xA do not capture what they do.</p>
+            <p>For each player I calculated age as season year minus birth year, and built per-90 versions of the main stats by dividing each cumulative figure by minutes played divided by 90. That way a player who scored 7 goals in 1,500 minutes is comparable to one who scored 10 in 3,000. The dependent variable in all models is the log of market value. Market values in La Liga range from €500,000 to €200,000,000 — a 400× difference, and without any transformation a handful of superstar valuations would dominate any linear model. Taking the log compresses the scale so that doubling in value always represents the same change. After all filters, the dataset has 2,679 player-season observations with no missing values.</p>
+
+            <h2 id="method">3. Methodology</h2>
+            <p>I used Ordinary Least Squares (OLS) regression to estimate the relationship between player performance and market value. I chose OLS for the same reason as in my first project: it is easy to interpret. Each coefficient tells me directly how much log market value changes when that variable goes up by one unit, holding everything else constant.</p>
+            <p>My starting idea was simple: build one model and see how well performance predicts market value. But fairly quickly I realised the more interesting question was whether xG predicts it better than actual goals. To test that properly I needed to compare two versions of the model side by side, which led me to build four models progressively.</p>
+            <p><strong>Model 1</strong> uses only traditional metrics: goals per 90, assists per 90, minutes played, position indicators, and season year. This is roughly how a scout might have evaluated players before advanced metrics became common. <strong>Model 2</strong> swaps goals and assists for their expected equivalents: xG per 90 and xA per 90. Everything else stays the same. If Model 2 fits better than Model 1, it means the market rewards underlying performance quality over raw results. <strong>Model 3</strong> puts both sets of metrics in together. <strong>Model 4</strong> adds player age and age squared. I did not plan to include age originally, but when I plotted market value against age the relationship was clearly not a straight line — values peaked somewhere in the early twenties and then dropped off.</p>
+            <p>Season year is included in all models as a control for the general rise in transfer market values over time. I also created indicator variables for position — one for Forwards and one for Midfielders — so the model could account for the fact that position affects market value independently of performance. Defenders are the baseline.</p>
+
+            <h2 id="results">4. Results</h2>
+            <h3>Exploratory Analysis</h3>
+            <p>Log market value is roughly normally distributed across all three positions, with Forwards and Midfielders sitting slightly higher than Defenders on average. The scatter plot of xG per 90 against log market value shows a clear upward trend across all positions, which suggested even before any modelling that xG carries real information about player value. Average market values in La Liga grew substantially over the sample period, from roughly €4M per player in 2014/15 to over €12M in 2022/23, before dipping slightly in recent seasons. That trend is why season year needs to be in the model as a control.</p>
+
+            <h3>Regression Results</h3>
+            <p>Models 1 and 2 have almost identical fit: R² = 0.268 for traditional metrics and R² = 0.266 for modern metrics. That was not what I expected. I thought xG would more clearly outperform raw goals as a predictor of market value. Instead, the transfer market prices goals and xG almost equally. The market does not seem to have made that shift yet, at least not clearly. A player who scores is valued about the same as a player who generates equivalent xG without converting.</p>
+            <p>When I put both sets of metrics in the same model, the results got harder to read. Goals and xG move together so closely across the dataset that the model struggles to tell them apart. Model 3 has a slightly higher R² of 0.278, but I would not read too much into the individual coefficients — the same multicollinearity issue I noticed in Project 1, where HomeCorners lost significance once shots on target were in the model.</p>
+            <p><strong>Model 4 is the strongest model with R² = 0.406.</strong> Adding age and age squared increased explanatory power by almost 13 percentage points over Model 3. That jump was larger than I expected. The model suggests market value rises with age up to a point and then starts falling, which is exactly the shape you would expect if the market is paying for potential.</p>
+            <p>The result I did not expect at all was the peak age. I assumed established stars in their mid-to-late twenties would be the most valuable. The data completely disagreed. The market values teenagers and players just entering their twenties the most. It is paying for potential, not just current form. Lamine Yamal entered La Liga at 16 with a market value already above €100 million, which is an extreme version of that idea.</p>
+            <p>The biggest surprise in Model 4 was <strong>xA per 90</strong>, which had the largest coefficient of any performance metric at 2.57, ahead of goals per 90 at 1.29 and assists per 90 at 1.08. Creative players who set up chances for others seem to be valued more highly than pure finishers, at least in La Liga, even when their own goals and assists are already in the model.</p>
+            <p>Season year comes out positive in all four models, which makes sense given how much transfer fees have risen over the decade. The Forward dummy is negative and significant in Models 2, 3, and 4, which I found counterintuitive. It may reflect the depth of forward talent in La Liga making it harder for forwards to stand out, but I am not certain of the explanation.</p>
+
+            <h2 id="limits">5. Limitations and Future Work</h2>
+            <p>The model explains about 40% of the variance in market values, so 60% is unexplained. Market value depends on things this dataset simply does not have: injury history, contract length, and media profile among others. A player's value is not just about what he does on the pitch.</p>
+            <p>Matching players across two different sources by name is not perfect. Some may have been missed, especially players with common names or unusual spellings. Transfermarkt valuations are estimates made by the Transfermarkt community, not actual transfer fees. A player valued at €20M might sell for €15M or €30M depending on how negotiations go. They are widely used as a proxy in football analytics but they are still subjective.</p>
+            <p>Future extensions: adding contract length and injury history would probably push R² well above 0.40. It would also be interesting to test whether the xG coefficient has grown relative to the goals coefficient over time — xG went from a niche metric in 2014 to something discussed on mainstream television by 2024. If the market has learned to use it, the relative importance of xG should have increased. Applying the same approach to the Premier League or Bundesliga would show whether the same patterns hold elsewhere.</p>
+
+            <h2 id="conclusion">6. Conclusion</h2>
+            <p>This project started with two questions: which performance metrics best predict player market value in La Liga, and does the market reward underlying performance quality or just results? On the first question, <strong>expected assists per 90 is the strongest individual predictor</strong>, followed by goals per 90 and assists per 90. Creative players who set up chances for teammates seem to be valued more highly than pure finishers, even when their own goals and assists are already in the model.</p>
+            <p>On the second question, the answer is not straightforward. Models 1 and 2 have nearly identical R² values: 0.268 for traditional metrics and 0.266 for xG and xA. The market prices goals and xG about the same. It has not clearly moved toward rewarding underlying quality over results.</p>
+            <p>The result I did not expect at all was the peak age. I assumed established stars in their mid-to-late twenties would command the highest values. The data showed the opposite — the market puts maximum value on teenagers and players just entering their twenties. It is paying for potential, not just current form. Alexander Isak is a good example. When he joined Real Sociedad in 2019/20 at age 20, his xG per 90 was 0.510 and his market value was €8 million. That was a bet, not a guarantee. By the time Newcastle paid €50 million for him, the market had caught up to what the numbers were already showing three years earlier.</p>
+            <p>Adding age to the model raised R² from 0.278 to 0.406, a jump of nearly 13 percentage points. Performance metrics alone explain about 27% of the variance in market value. Age adds another 13%. The remaining 60% is everything the model cannot see: injuries, contracts, media profile, and the fact that valuations are ultimately human judgements.</p>
+
+            <div class="article-refs">
+              <p>understat.com. La Liga player statistics, 2014/15–2024/25.</p>
+              <p>Cariboo, D. (2024). Football Data from Transfermarkt. Kaggle. CC0 Public Domain. (davidcariboo/player-scores)</p>
+              <p>Seabold, S., &amp; Perktold, J. (2010). Statsmodels: Econometric and statistical modeling with Python. <em>Proceedings of the 9th Python in Science Conference.</em></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <aside class="writeup-toc">
+        <nav class="toc-nav">
+          <a href="#intro" class="toc-link">1. Introduction</a>
+          <a href="#data" class="toc-link">2. Data</a>
+          <a href="#method" class="toc-link">3. Methodology</a>
+          <a href="#results" class="toc-link">4. Results</a>
+          <a href="#limits" class="toc-link">5. Limitations</a>
+          <a href="#conclusion" class="toc-link">6. Conclusion</a>
+        </nav>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+
+    <div class="footer-upper">
+      <div class="footer-left">
+        <p class="footer-contact-label">Contact</p>
+        <div class="footer-contact-rows">
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Work</span>
+            <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener"
+               class="footer-contact-link">
+              LinkedIn
+            </a>
+          </div>
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Info</span>
+            <a href="resume.pdf" target="_blank" rel="noopener"
+               class="footer-contact-link">
+              CV
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <a href="mailto:imanuellopezpaz@gmail.com" class="footer-contact-link">
+          Reach Out!
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-bottom-text">Made with love &amp; late-night mate 🧉</p>
+      <p class="footer-copy">© 2025 Manuel Lopez Paz</p>
+    </div>
+
+  </footer>
+
+  <script src="js/main.js" defer></script>
+
+  <script>
+  (function() {
+    const links = document.querySelectorAll('.toc-link');
+    const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href')));
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    sections.forEach(s => s && observer.observe(s));
+  })();
+  </script>
+
+  <!-- ── Page-specific styles — loaded last to override style.css ── -->
+  <style>
+    .nav-github-center { justify-self: center; }
+
+    .notes-back-row {
+      position: fixed;
+      top: 88px;
+      left: var(--pad-h);
+      padding: 0;
+      z-index: 90;
+    }
+
+    /* ── Wide two-column layout ── */
+    .writeup-layout {
+      display: grid;
+      grid-template-columns: 1fr 120px;
+      gap: 48px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--pad-h) 140px;
+      align-items: start;
+    }
+    .writeup-main { min-width: 0; }
+    .project-page { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+    .article { max-width: 860px !important; margin: 0 !important; }
+
+    /* ── TOC — minimal, right-edge detail ── */
+    .writeup-toc {
+      position: sticky;
+      top: 120px;
+      padding-top: 80px;
+    }
+    .toc-nav { display: flex; flex-direction: column; gap: 10px; }
+    .toc-link {
+      font-size: 10px;
+      color: #383838;
+      text-decoration: none;
+      line-height: 1.4;
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .toc-link:hover { color: #666; }
+    .toc-link.active { color: #888; }
+    @media (max-width: 1000px) {
+      .writeup-layout { grid-template-columns: 1fr; padding: 0 var(--pad-h) 80px; }
+      .writeup-toc { display: none; }
+      .article { max-width: 100% !important; }
+    }
+
+    /* ── Header ── */
+    .project-page-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 18px;
+      margin-top: 80px;
+    }
+    .project-page-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #ffffff !important;
+      margin-bottom: 12px;
+    }
+    .project-page-subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    /* ── Intro paragraph ── */
+    .writeup-intro {
+      font-size: 19px;
+      line-height: 1.75;
+      color: #d8d8d8;
+      margin-bottom: 56px;
+      font-weight: 400;
+      max-width: 700px;
+    }
+
+    /* ── Article typography ── */
+    .article h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff !important;
+      margin: 72px 0 18px;
+      letter-spacing: -0.01em;
+    }
+    .article h3 {
+      font-size: 11px;
+      font-weight: 600;
+      color: #555;
+      margin: 40px 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .article p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #aaa !important;
+      margin-bottom: 24px;
+    }
+    .article p strong { color: #ffffff; font-weight: 600; }
+
+    /* ── Formula block ── */
+    .formula-block {
+      background: #0a0a0a;
+      border: 1px solid #1e1e1e;
+      color: #666;
+      font-size: 13px;
+      padding: 20px 24px;
+      border-radius: 6px;
+      margin: 20px 0 28px;
+      overflow-x: auto;
+      line-height: 1.7;
+    }
+
+    /* ── Figures ── */
+    .article-figure {
+      margin: 56px 0;
+      border: 1px solid #1e1e1e;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .article-figure img { width: 100%; height: auto; display: block; }
+    .article-figure figcaption {
+      padding: 12px 18px;
+      font-size: 12px;
+      color: #444;
+      line-height: 1.5;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    /* ── References ── */
+    .article-refs {
+      border-top: 1px solid #1e1e1e;
+      margin-top: 72px;
+      padding-top: 28px;
+    }
+    .article-refs p {
+      font-size: 12px;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .article-refs-label { color: #555; }
+  </style>
+</body>
+</html>

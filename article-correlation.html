@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>When Numbers Lie — Manuel Lopez Paz</title>
+  <meta name="description" content="Correlation, causation, and why the slogan is not enough." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Loading Screen ──────────────────────────────────── -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-dots">
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+    </div>
+    <p class="loader-text">Just a moment.</p>
+  </div>
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <span class="nav-brand">Manuel Lopez Paz</span>
+    <div class="nav-meta" aria-hidden="true">
+      <span class="nav-meta-line">Manuel's Notes</span>
+      <span class="nav-meta-line">Analysis</span>
+    </div>
+    <div class="nav-github-center"></div>
+    <div class="nav-external">
+      <a href="mailto:imanuellopezpaz@gmail.com" class="nav-ext-link">Email</a>
+      <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="nav-ext-link">LinkedIn</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <div class="notes-back-row">
+      <a href="index.html" class="notes-back-link">← <span class="notes-back-text">Back</span></a>
+    </div>
+
+    <div class="project-page">
+
+      <p class="project-page-eyebrow">Analysis · 2025</p>
+      <h1 class="project-page-title">When Numbers Lie</h1>
+      <p class="project-page-subtitle">Correlation, Causation, and Why the Slogan Is Not Enough</p>
+
+      <div class="article">
+
+        <p>Argentina has more psychologists per capita than any other country in the world. Buenos Aires alone has around 500 psychologists per 100,000 inhabitants. And if you look at how they are distributed across the city, you notice something interesting: there are far more in wealthier neighbourhoods like Palermo or Recoleta than in lower-income areas. A naive reading of that pattern might suggest that wealthier neighbourhoods have more psychological problems. The actual explanation is simpler: wealthier areas have more people who can afford to pay for therapy. Both the number of psychologists and the demand for their services are being driven by a third variable, income, that the initial observation ignored entirely.</p>
+        <p>That is a confound. And once you see confounds, you start noticing them everywhere.</p>
+        <p>Everyone has heard the phrase. "Correlation does not imply causation." It shows up in statistics classes, in arguments online, occasionally on coffee mugs. And yet the world keeps acting as though it does not quite believe it.</p>
+        <p>In 2012, a paper in the New England Journal of Medicine pointed out a near-perfect correlation between per-capita chocolate consumption and the number of Nobel Prize winners per country — countries that eat more chocolate per person tend to produce more Nobel laureates. The paper was partly a joke. News organisations reported it seriously. During COVID, a chart circulated showing that countries with higher mask-wearing rates also had higher death rates. That was statistically true, because those countries had introduced masks in response to already-high transmission. Causality ran backwards. Policy discussions followed anyway.</p>
+        <p>The problem is not that people have never heard the slogan. It is that the slogan does not tell you what to do next. It tells you what to avoid but not how to figure out whether a real causal relationship actually exists. This piece introduces four ideas that do that: confounding, spurious correlation, selection bias, and reverse causality. Each one describes a different way a correlation can mislead you.</p>
+
+        <h2>Confounding: the variable nobody measured</h2>
+        <p>In the United States, monthly data shows that ice cream sales and drowning incidents peak at exactly the same time. The correlation is strong. If you looked at this without any context, two explanations would come to mind: ice cream causes drowning, or drowning somehow causes ice cream sales.</p>
+        <p>Neither is right. Both variables are being driven by a third one: summer temperature. Warmer weather makes people swim and buy ice cream independently of each other. Season is the confounder, a variable that influences both things at once, producing a correlation between them that has nothing to do with one causing the other.</p>
+        <p>You can test this simply. If you compare ice cream sales and drowning rates only within the same season — July against July across different years for example — the temperature is no longer varying between data points. And when you do that, the correlation essentially disappears. The association was never between ice cream and drowning. It was between each of them and the time of year.</p>
+        <p>This is one of the most important questions to ask when you see a correlation: what else might be driving both variables at the same time? The Buenos Aires psychologist example works the same way. Income drives both the supply of therapists and the demand for their services, and ignoring that produces a misleading picture.</p>
+
+        <h2>Spurious correlation: when the numbers just happen to move together</h2>
+        <p>Confounding involves a real third variable. Spurious correlations can arise without one, simply because two unrelated series happen to move in the same direction over the same period, or because if you test enough pairs of variables, some will correlate by chance alone.</p>
+        <p>Between 1999 and 2009, the number of films Nicolas Cage appeared in correlates with the number of people who drowned in US swimming pools at r = 0.87. That is statistically significant. It is also completely meaningless. There is no story connecting those two things. The correlation exists because both happened to rise and fall over the same decade for entirely unrelated reasons.</p>
+        <p>The right response to a correlation like this is to ask a few things. Is there any plausible mechanism that could connect these two variables? How many other pairs were tested before this one showed up? Are both variables just moving with broader trends in the same society over the same time period?</p>
+        <p>The Cage example is amusing enough to stick. The same problem appears in less amusing forms. The number of cinema screens per capita correlates with life expectancy across countries. Per-capita cheese consumption correlates with death by bedsheet tangling, which is exactly what it sounds like. These relationships are real in the data. They are not real in the world.</p>
+
+        <h2>Selection bias: the patients nobody is counting</h2>
+        <p>Selection bias is what happens when the sample used to draw a conclusion is not representative of the group you actually care about, specifically when the reason certain people end up in the sample is connected to what you are trying to measure.</p>
+        <p>Specialist centres consistently appear in public data with higher death rates than smaller hospitals. The obvious reading is that the best hospitals are somehow more dangerous. It is wrong.</p>
+        <p>Specialist centres do not receive random patients. They receive the most critically ill, those whose conditions are too severe or complex for smaller hospitals. A direct comparison of death rates mixes up two things that should be kept separate: how sick patients were when they arrived and how well the hospital cared for them afterwards.</p>
+        <p>Once you account for patient severity, specialist centres perform as well as or better than smaller hospitals at equivalent levels of illness. What looked like a dangerous pattern was actually measuring patient selection, not clinical quality.</p>
+        <p>This kind of mistake appears constantly in real-world data. Any time the groups being compared differ in their characteristics before the comparison even starts — which is most of the time — a direct comparison will conflate the effect you are trying to measure with the background differences between groups.</p>
+
+        <h2>Reverse causality: which direction does the arrow point?</h2>
+        <p>Does spending more time on social media make people feel lonelier, or do people who already feel lonely spend more time on their phones? It sounds like a simple question. It is not. Both directions are plausible. Someone who is lonely might turn to their phone for connection, which would produce a correlation between social media use and loneliness even if the app itself is not causing anything. But extended time on social media could also displace real-world interaction and make loneliness worse. The correlation exists either way. The direction is genuinely ambiguous.</p>
+        <p>The same structure appears in many places. Does exercise improve your mood, or do people who are already feeling better find it easier to get up and go to the gym? Do higher incomes make people happier, or do happier people tend to perform better and earn more over time? In each case, the correlation is real and the direction is not obvious.</p>
+        <p>Figuring out which direction the cause actually goes is often the hardest part of any analysis. It usually requires more than observing the data. It requires thinking carefully about the sequence of events, what could plausibly be causing what, and whether there is any way to observe the relationship under conditions that would make the direction clearer.</p>
+
+        <h2>From slogan to question</h2>
+        <p>"Correlation does not imply causation" is a warning. The four ideas above are what follow from it.</p>
+        <p>When you see a correlation, it is worth asking: what else might be driving both variables? Could this be a coincidence from testing too many pairs? Are the groups being compared actually comparable to begin with? Which direction does causality most plausibly run?</p>
+        <p>These are not exotic concerns reserved for academics. They are the questions worth asking any time a headline tells you that something causes something else. Correlation is not useless — it is usually the starting point, the signal that something worth investigating might be there. The problem is when it becomes the conclusion.</p>
+        <p>When that happens, ice cream stands start getting closed on beaches, and the drowning rates do not move.</p>
+
+      </div><!-- /article -->
+
+    </div><!-- /project-page -->
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-upper">
+      <div class="footer-left">
+        <p class="footer-contact-label">Contact</p>
+        <div class="footer-contact-rows">
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Work</span>
+            <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="footer-contact-link">LinkedIn</a>
+          </div>
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Info</span>
+            <a href="resume.pdf" target="_blank" rel="noopener" class="footer-contact-link">CV</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:imanuellopezpaz@gmail.com" class="footer-contact-link">Reach Out!</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-bottom-text">Made with love &amp; late-night mate 🧉</p>
+      <p class="footer-copy">© 2025 Manuel Lopez Paz</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+
+  <!-- ── Page-specific styles — loaded last to override style.css ── -->
+  <style>
+    .nav-github-center { justify-self: center; }
+
+    .notes-back-row {
+      position: fixed;
+      top: 88px;
+      left: var(--pad-h);
+      padding: 0;
+      z-index: 90;
+    }
+
+    .project-page {
+      max-width: 1400px !important;
+      margin: 0 auto !important;
+      padding: 0 var(--pad-h) 140px !important;
+    }
+    .article { max-width: 860px !important; margin: 0 !important; }
+
+    .project-page-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 18px;
+      margin-top: 80px;
+    }
+    .project-page-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #ffffff !important;
+      margin-bottom: 12px;
+    }
+    .project-page-subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 48px;
+    }
+
+    .article h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff !important;
+      margin: 64px 0 16px;
+      letter-spacing: -0.01em;
+    }
+    .article h3 {
+      font-size: 11px;
+      font-weight: 600;
+      color: #555;
+      margin: 40px 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .article p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #aaa !important;
+      margin-bottom: 24px;
+    }
+    .article p strong { color: #ffffff; font-weight: 600; }
+  </style>
+</body>
+</html>

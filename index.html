@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manuel Lopez Paz</title>
+  <meta name="description" content="Portfolio of Manuel Lopez Paz — projects, research, and journey." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Loading Screen ──────────────────────────────────── -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-dots">
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+    </div>
+    <p class="loader-text">Just a moment.</p>
+  </div>
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+
+    <!-- Col 1: Name -->
+    <span class="nav-brand">Manuel Lopez Paz</span>
+
+    <!-- Col 2: Location / Role -->
+    <div class="nav-meta" aria-hidden="true">
+      <span class="nav-meta-line">Buenos Aires, AR</span>
+      <span class="nav-meta-line">Prospective EOR Student</span>
+    </div>
+
+    <!-- Col 3: 1fr spacer — pushes links right -->
+
+    <!-- Col 4: External links -->
+    <div class="nav-external">
+      <a href="mailto:imanuellopezpaz@gmail.com" class="nav-ext-link">Email</a>
+      <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="nav-ext-link">LinkedIn</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
+    </div>
+
+  </nav>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════════════════
+         HERO
+         ══════════════════════════════════════════════════════ -->
+    <section class="jb-hero-section" aria-label="Introduction">
+      <div class="jb-hero">
+        <h1 class="jb-headline">
+          Hello — I'm an Argentine student transitioning into Econometrics &amp; Operations Research, interested in modeling and decision-making under uncertainty.
+        </h1>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         PROJECTS
+         ══════════════════════════════════════════════════════ -->
+    <div class="jb-chapters" id="projects">
+
+      <!-- Project 01 -->
+      <article class="jb-chapter reveal">
+        <a class="project-link" href="premier-league-home-advantage.html">
+          <div class="project-row">
+            <span class="project-year">2025</span>
+            <h2 class="project-title">Did Crowd Absence Reduce Home Advantage?</h2>
+            <p class="project-desc">Used regression and statistical tests on 9,380 matches to estimate the impact of crowd absence during COVID-19, finding a measurable decline in home advantage (Premier League, 2000–2025).</p>
+          </div>
+          <div class="project-visual">
+            <img
+              src="images/project-crowd-absence.jpg"
+              alt="Crowd Absence & Home Advantage — Premier League"
+              loading="lazy"
+              onerror="this.style.display='none'; this.parentElement.classList.add('img-placeholder-fallback')"
+            />
+          </div>
+        </a>
+      </article>
+
+      <!-- Project 02 -->
+      <article class="jb-chapter reveal">
+        <a class="project-link" href="la-liga-market-value-analysis.html">
+          <div class="project-row">
+            <span class="project-year">2025–2026</span>
+            <h2 class="project-title">Does the Football Transfer Market Reward Performance or Potential?</h2>
+            <p class="project-desc">Scraped and merged 2,679 player-seasons to model market value using OLS regression, finding that value peaks around ages 19–20, suggesting the market rewards potential (La Liga, 2012–2024).</p>
+          </div>
+          <div class="project-visual">
+            <img
+              src="images/project-transfer-market.jpg"
+              alt="Transfer Market Value — La Liga"
+              loading="lazy"
+              onerror="this.style.display='none'; this.parentElement.classList.add('img-placeholder-fallback')"
+            />
+          </div>
+        </a>
+      </article>
+
+    </div><!-- /jb-chapters -->
+
+
+    <section class="articles-section reveal" id="notes">
+      <div class="articles-header">
+        <span class="articles-label">Notes</span>
+      </div>
+      <a href="article-correlation.html" class="article-row">
+        <div class="article-row-thumb">
+          <img src="images/article-correlation.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div class="article-row-body">
+          <span class="article-row-title">When Numbers Lie</span>
+          <span class="article-row-desc">On correlation, causation, and the ways statistics mislead.</span>
+        </div>
+        <span class="article-row-arrow">→</span>
+      </a>
+      <a href="article-whoop.html" class="article-row">
+        <div class="article-row-thumb">
+          <img src="images/article-whoop.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div class="article-row-body">
+          <span class="article-row-title">What Does Your Whoop Actually Measure?</span>
+          <span class="article-row-desc">What HRV, recovery scores, and fitness wearables actually track.</span>
+        </div>
+        <span class="article-row-arrow">→</span>
+      </a>
+      <a href="article-surge.html" class="article-row">
+        <div class="article-row-thumb">
+          <img src="images/article-surge.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div class="article-row-body">
+          <span class="article-row-title">Why Does Your Ride Cost More in the Rain?</span>
+          <span class="article-row-desc">The economics of surge pricing and real-time demand.</span>
+        </div>
+        <span class="article-row-arrow">→</span>
+      </a>
+      <a href="article-f1.html" class="article-row">
+        <div class="article-row-thumb">
+          <img src="images/article-f1.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+        </div>
+        <div class="article-row-body">
+          <span class="article-row-title">The 3-Second Decision</span>
+          <span class="article-row-desc">How F1 teams process data and make calls under pressure.</span>
+        </div>
+        <span class="article-row-arrow">→</span>
+      </a>
+    </section>
+
+
+    <div id="journey"></div>
+
+    <div class="h-scroll-wrapper" id="hScrollWrapper">
+      <div class="h-scroll-sticky">
+
+        <div class="h-progress-bar">
+          <div class="h-progress-fill" id="hProgressFill"></div>
+        </div>
+
+        <div class="h-scroll-hint" id="hScrollHint">Scroll to explore →</div>
+
+        <div class="h-scroll-track" id="hScrollTrack">
+
+          <!-- Slide 1: text → image -->
+          <div class="journey-slide">
+            <div class="journey-slide-inner">
+              <p class="journey-slide-text">This is my story — alongside a few photos from Buenos Aires.</p>
+              <div class="journey-slide-img">
+                <img src="images/journey-1.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: image → text -->
+          <div class="journey-slide">
+            <div class="journey-slide-inner">
+              <div class="journey-slide-img">
+                <img src="images/journey-2.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+              </div>
+              <p class="journey-slide-text">I've always been a curious person. When something catches my attention, I tend to look it up and understand the story behind it. That habit of asking "why" is what led me toward data and analysis.</p>
+            </div>
+          </div>
+
+          <!-- Slide 3: text → image -->
+          <div class="journey-slide">
+            <div class="journey-slide-inner">
+              <p class="journey-slide-text">In high school, I became interested in business through projects focused on decisions and outcomes. Working with data felt more natural than anything else.</p>
+              <div class="journey-slide-img">
+                <img src="images/journey-3.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4: image → text -->
+          <div class="journey-slide">
+            <div class="journey-slide-inner">
+              <div class="journey-slide-img">
+                <img src="images/journey-4.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+              </div>
+              <p class="journey-slide-text">While studying business, I realized I was most engaged in quantitative subjects, especially statistics. It pushed me to start exploring data on my own.</p>
+            </div>
+          </div>
+
+          <!-- Slide 5: text → image -->
+          <div class="journey-slide">
+            <div class="journey-slide-inner">
+              <p class="journey-slide-text">Because I've always followed sports closely, it felt natural to start there. I began working with datasets, learning Python, and exploring patterns behind performance and results.</p>
+              <div class="journey-slide-img">
+                <img src="images/journey-5.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 6: image → text -->
+          <div class="journey-slide">
+            <div class="journey-slide-inner">
+              <div class="journey-slide-img">
+                <img src="images/journey-6.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+              </div>
+              <p class="journey-slide-text">Through this process, I realized I was more interested in using data to understand decisions than just describing outcomes. That shift is what drew me to econometrics and operations research.</p>
+            </div>
+          </div>
+
+          <!-- Slide 7: text → image -->
+          <div class="journey-slide">
+            <div class="journey-slide-inner">
+              <p class="journey-slide-text">I aim to work in environments where data and strategy meet — whether in sports, technology, or other complex industries.</p>
+              <div class="journey-slide-img">
+                <img src="images/journey-7.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 8: image → text (last) -->
+          <div class="journey-slide journey-slide--last">
+            <div class="journey-slide-inner">
+              <div class="journey-slide-img">
+                <img src="images/journey-8.jpg" alt="" loading="lazy" onerror="this.style.display='none'" />
+              </div>
+              <p class="journey-slide-text">Outside of academics, I enjoy football, going to the gym, playing Catan with friends, and exploring new technologies.</p>
+            </div>
+          </div>
+
+        </div><!-- /h-scroll-track -->
+      </div><!-- /h-scroll-sticky -->
+    </div><!-- /h-scroll-wrapper -->
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+
+    <div class="footer-upper">
+      <div class="footer-left">
+        <p class="footer-contact-label">Contact</p>
+        <div class="footer-contact-rows">
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Work</span>
+            <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener"
+               class="footer-contact-link">
+              LinkedIn
+            </a>
+          </div>
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Info</span>
+            <a href="resume.pdf" target="_blank" rel="noopener"
+               class="footer-contact-link">
+              CV
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <a href="mailto:imanuellopezpaz@gmail.com" class="footer-contact-link">
+          Reach Out!
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-bottom-text">Made with love &amp; late-night mate 🧉</p>
+      <p class="footer-copy">© 2025 Manuel Lopez Paz</p>
+    </div>
+
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

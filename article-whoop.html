@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Does Your Whoop Actually Measure? — Manuel Lopez Paz</title>
+  <meta name="description" content="A look at how wearables turn green light into a recovery score — and what that means for how you use it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── Loading Screen ──────────────────────────────────── -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-dots">
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+      <span class="loader-dot"></span>
+    </div>
+    <p class="loader-text">Just a moment.</p>
+  </div>
+
+  <!-- ── Navigation ──────────────────────────────────────── -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <span class="nav-brand">Manuel Lopez Paz</span>
+    <div class="nav-meta" aria-hidden="true">
+      <span class="nav-meta-line">Manuel's Notes</span>
+      <span class="nav-meta-line">Analysis</span>
+    </div>
+    <div class="nav-github-center"></div>
+    <div class="nav-external">
+      <a href="mailto:imanuellopezpaz@gmail.com" class="nav-ext-link">Email</a>
+      <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="nav-ext-link">LinkedIn</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <div class="notes-back-row">
+      <a href="index.html" class="notes-back-link">← <span class="notes-back-text">Back</span></a>
+    </div>
+
+    <div class="project-page">
+
+      <p class="project-page-eyebrow">Analysis · 2025</p>
+      <h1 class="project-page-title">What Does Your Whoop Actually Measure?</h1>
+      <p class="project-page-subtitle">From green light to recovery score — and why the gap matters</p>
+
+      <div class="article">
+
+        <p>I have been using a Whoop for a while now, and at some point I started wondering what it was actually measuring. Not because something felt wrong, but because the more I thought about it, the less obvious the answer was. The recovery score shows up every morning and it is easy to just accept it as a fact about your body. But once I started looking into how it works, the question became genuinely interesting.</p>
+        <p>It turns out that the number is not a measurement in the way that a blood test is a measurement. It is an estimate, the output of a chain of transformations that begins with a small green light pressed against your skin and ends, several steps later, in a percentage that feels authoritative. At each step, assumptions are made. The interface projects a lot of confidence: clean percentages, colour coded scores, decimal point precision. But that confidence is partly a product of design, not measurement accuracy. The sensor knows less than the app implies, and that is worth understanding.</p>
+
+        <h2>The green light on your wrist</h2>
+        <p>Most wearables measure your heart by shining a small LED into your skin and measuring how much light bounces back. Blood absorbs green light. Blood volume in the capillaries under your skin changes with every heartbeat. So the reflected light pulses in a pattern that can be used to infer the timing of your heartbeats.</p>
+        <p>Notice the word infer. The sensor does not directly measure your heart. It measures light. That light then passes through several processing steps — filtering out movement interference, detecting the peaks in the signal, converting those peaks into a heart rate estimate — before anything resembling a cardiac measurement emerges. The device on your wrist is doing considerably more computation than the polished interface suggests.</p>
+        <p>From that processed signal, a further metric is calculated: Heart Rate Variability, or HRV. HRV does not measure how fast your heart beats. It measures the variation in the time between consecutive beats. A heart beating at exactly 60 beats per minute with robotic precision has an HRV of zero. A real human heart at 60 beats per minute will have slight irregularities between beats, and the size of those irregularities turns out to be a surprisingly useful indicator of how recovered your body is. Higher variation generally means your nervous system is in a rest and recovery state. Lower variation often signals stress, fatigue, or illness.</p>
+        <p>But even HRV is not what the app shows you. Whoop takes your HRV, compares it to your own rolling baseline over the past few months, weights it alongside sleep duration, sleep quality, and recent training load, and produces a recovery score. The chain from green light to percentage is several steps long and none of those steps are visible to the user.</p>
+
+        <h2>What can affect the reading</h2>
+        <p>The sensor is picking up a signal in conditions that are rarely perfectly controlled. Things like ambient temperature, how well hydrated you are, and how the device sits on your wrist during sleep can all affect the quality of the reading. Movement is a known source of interference for this type of sensor, which is why wearables generally measure HRV during sleep when you are relatively still rather than during the day.</p>
+        <p>That does not mean the device is unreliable. It means that any individual reading can be noisier than it looks. The percentage on your screen carries more certainty than the underlying measurement always justifies.</p>
+
+        <h2>What the recovery score is actually doing</h2>
+        <p>The recovery score is more sophisticated than a simple daily reading. It already incorporates your personal baseline, your recent sleep, and your training history. In that sense it is doing a lot of the heavy lifting for you.</p>
+        <p>But it is worth keeping in mind that all of that context gets compressed into a single number. A green 83% and a red 42% feel like clear verdicts. What they actually represent is a model's best estimate, built on several layers of data that each carry their own uncertainty. The score of a single day can be affected by a night where the strap fit slightly differently or sleep was more disrupted than usual.</p>
+        <p>That does not make the recovery score useless. It makes looking at how it moves over several days more informative than reacting to any single morning. A persistent drop over a week tells you something real. A single low score after a night where you barely slept is probably telling you exactly what you already know.</p>
+
+        <h2>You are not a single data point. You are a trend.</h2>
+        <p>HRV is extraordinarily individual. A reading that is completely normal for one person can be low for another, depending on age, fitness level, genetics, and dozens of other factors. Comparing your numbers to someone else's makes about as much sense as comparing your height to a friend's to determine whether you had a good night's sleep. The number is real. The comparison is not.</p>
+        <p>This also matters for how sports teams use wearable data. A physiotherapy team might notice that across the squad, lower average HRV tends to precede higher injury rates the following week. That is a useful pattern at the group level. It does not automatically follow that any individual player with a lower reading is at elevated risk, because the variation between people is so large that individual conclusions become much harder to draw. What works as a predictor across a squad does not automatically apply to any individual player in it.</p>
+
+        <h2>The prediction problem</h2>
+        <p>The commercial pitch for wearables goes beyond monitoring. It is about prediction — the idea that your morning score can tell you whether to train hard or rest. This is a more demanding claim.</p>
+        <p>There is genuine research supporting the idea that HRV trends can help guide training decisions. The relationships are real, if modest. But there is a gap between finding a pattern in a study and reliably predicting outcomes for a specific person on a specific day. Most of the supporting research is based on relatively small groups measured under controlled conditions, which is not the same as someone checking their phone in the morning and deciding whether to go to the gym.</p>
+        <p>There is also the question of what the score is not measuring. An athlete who performs brilliantly despite a red recovery score has not disproved anything. They have illustrated something important: physiological readiness is one input among many. Motivation, how well you slept three nights ago, what you ate, and pure chance are also inputs. Even a perfect readiness measurement would explain only part of what actually happens on a given day.</p>
+
+        <h2>A useful tool, used well</h2>
+        <p>Consumer wearables have put genuinely interesting physiological information into more hands than ever before. That is a real development. For a lot of people, seeing their sleep data or recovery trends is what motivates them to take rest more seriously, build more consistent routines, or notice when something is off before it becomes a bigger problem. That has real value.</p>
+        <p>The point of understanding how the score is built is not to distrust it. It is to use it better. The recovery score already does a lot of work to give you context. What you can add is the habit of reading it across time rather than as a daily verdict, and the awareness that a single unusual reading is worth noting but not necessarily worth reacting to.</p>
+        <p>I still check mine every morning. I just no longer treat a green number as permission and a red one as a sentence. I look at where things have been moving over the past week or two, and I pay attention when something shifts and stays shifted. And on the days when the score says one thing and my body says another, I have learned to trust the one that has been running longer — usually the one that shows up as a cramp halfway through warmup.</p>
+
+      </div><!-- /article -->
+
+    </div><!-- /project-page -->
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-upper">
+      <div class="footer-left">
+        <p class="footer-contact-label">Contact</p>
+        <div class="footer-contact-rows">
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Work</span>
+            <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="footer-contact-link">LinkedIn</a>
+          </div>
+          <div class="footer-contact-row">
+            <span class="footer-contact-key">Info</span>
+            <a href="resume.pdf" target="_blank" rel="noopener" class="footer-contact-link">CV</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:imanuellopezpaz@gmail.com" class="footer-contact-link">Reach Out!</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-bottom-text">Made with love &amp; late-night mate 🧉</p>
+      <p class="footer-copy">© 2025 Manuel Lopez Paz</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+
+  <!-- ── Page-specific styles — loaded last to override style.css ── -->
+  <style>
+    .nav-github-center { justify-self: center; }
+
+    .notes-back-row {
+      position: fixed;
+      top: 88px;
+      left: var(--pad-h);
+      padding: 0;
+      z-index: 90;
+    }
+
+    .project-page {
+      max-width: 1400px !important;
+      margin: 0 auto !important;
+      padding: 0 var(--pad-h) 140px !important;
+    }
+    .article { max-width: 860px !important; margin: 0 !important; }
+
+    .project-page-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 18px;
+      margin-top: 80px;
+    }
+    .project-page-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #ffffff !important;
+      margin-bottom: 12px;
+    }
+    .project-page-subtitle {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 48px;
+    }
+
+    .article h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff !important;
+      margin: 64px 0 16px;
+      letter-spacing: -0.01em;
+    }
+    .article h3 {
+      font-size: 11px;
+      font-weight: 600;
+      color: #555;
+      margin: 40px 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .article p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #aaa !important;
+      margin-bottom: 24px;
+    }
+    .article p strong { color: #ffffff; font-weight: 600; }
+  </style>
+</body>
+</html>
