@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found — Manuel Lopez Paz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <span class="nav-brand">Manuel Lopez Paz</span>
+    <div class="nav-meta" aria-hidden="true">
+      <span class="nav-meta-line">Buenos Aires, AR</span>
+      <span class="nav-meta-line">Prospective EOR Student</span>
+    </div>
+    <div class="nav-external">
+      <a href="mailto:imanuellopezpaz@gmail.com" class="nav-ext-link">Email</a>
+      <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="nav-ext-link">LinkedIn</a>
+      <a href="resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="not-found-wrap">
+      <p class="not-found-code">404</p>
+      <h1 class="not-found-title">Page not found.</h1>
+      <p class="not-found-sub">This page doesn't exist or was moved.</p>
+      <a href="index.html" class="not-found-back">← Back to home</a>
+    </div>
+  </main>
+
+  <script src="js/main.js" defer></script>
+
+  <style>
+    .not-found-wrap {
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 var(--pad-h);
+      gap: 16px;
+    }
+    .not-found-code {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #444;
+      margin: 0;
+    }
+    .not-found-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: #fff;
+      margin: 0;
+    }
+    .not-found-sub {
+      font-size: 15px;
+      color: #555;
+      margin: 0;
+    }
+    .not-found-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      padding: 7px 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+    .not-found-back:hover {
+      color: #fff;
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.05);
+    }
+  </style>
+</body>
+</html>
