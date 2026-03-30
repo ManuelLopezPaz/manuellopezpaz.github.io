@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>When Numbers Lie — Manuel Lopez Paz</title>
   <meta name="description" content="Correlation, causation, and why the slogan is not enough." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
 
@@ -34,21 +34,24 @@
     <div class="nav-external">
       <a href="mailto:imanuellopezpaz@gmail.com" class="nav-ext-link">Email</a>
       <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="nav-ext-link">LinkedIn</a>
-      <a href="resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
+      <a href="../assets/resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
     </div>
   </nav>
 
   <main>
 
     <div class="notes-back-row">
-      <a href="index.html" class="notes-back-link">← <span class="notes-back-text">Back</span></a>
+      <a href="../index.html" class="notes-back-link">← <span class="notes-back-text">Back</span></a>
     </div>
 
     <div class="project-page">
 
-      <p class="project-page-eyebrow">Analysis · 2025</p>
       <h1 class="project-page-title">When Numbers Lie</h1>
       <p class="project-page-subtitle">Correlation, Causation, and Why the Slogan Is Not Enough</p>
+
+      <div class="article-cover-banner">
+        <img src="../images/article-correlation.jpg" alt="" loading="lazy" />
+      </div>
 
       <div class="article">
 
@@ -105,7 +108,7 @@
           </div>
           <div class="footer-contact-row">
             <span class="footer-contact-key">Info</span>
-            <a href="resume.pdf" target="_blank" rel="noopener" class="footer-contact-link">CV</a>
+            <a href="../assets/resume.pdf" target="_blank" rel="noopener" class="footer-contact-link">CV</a>
           </div>
         </div>
       </div>
@@ -119,7 +122,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js" defer></script>
+  <script src="../js/main.js" defer></script>
 
   <!-- ── Page-specific styles — loaded last to override style.css ── -->
   <style>
@@ -127,40 +130,66 @@
 
     .notes-back-row {
       position: fixed;
-      top: 88px;
-      left: var(--pad-h);
+      top: 80px;
+      left: 24px;
       padding: 0;
       z-index: 90;
     }
+    .notes-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #666;
+      text-decoration: none;
+      border: 1px solid #2a2a2a;
+      border-radius: 20px;
+      padding: 5px 12px;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .notes-back-link:hover {
+      background: #1a1a1a;
+      color: #aaa;
+    }
 
     .project-page {
-      max-width: 1400px !important;
+      max-width: none !important;
       margin: 0 auto !important;
-      padding: 0 var(--pad-h) 140px !important;
+      padding: 0 150px 140px !important;
     }
-    .article { max-width: 860px !important; margin: 0 !important; }
+    .article { max-width: 100% !important; margin: 0 !important; }
 
-    .project-page-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #555;
-      margin-bottom: 18px;
-      margin-top: 80px;
-    }
     .project-page-title {
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 800;
-      line-height: 1.08;
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.05;
       letter-spacing: -0.03em;
-      color: #ffffff !important;
+      color: #ffffff;
       margin-bottom: 12px;
+      margin-top: 140px;
     }
     .project-page-subtitle {
       font-size: 16px;
-      color: #666;
-      margin-bottom: 48px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 36px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .article-cover-banner {
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+      margin: 0 0 48px;
+      border-radius: 0;
+    }
+    .article-cover-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .article h2 {
@@ -173,15 +202,15 @@
     .article h3 {
       font-size: 11px;
       font-weight: 600;
-      color: #555;
+      color: rgba(255,255,255,0.5);
       margin: 40px 0 12px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
     .article p {
       font-size: 16px;
-      line-height: 1.9;
-      color: #aaa !important;
+      line-height: 1.8;
+      color: #d0d0d0 !important;
       margin-bottom: 24px;
     }
     .article p strong { color: #ffffff; font-weight: 600; }
