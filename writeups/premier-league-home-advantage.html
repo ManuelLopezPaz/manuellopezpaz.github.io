@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Did Crowd Absence Reduce Home Advantage? — Manuel Lopez Paz</title>
   <meta name="description" content="Statistical analysis of crowd absence and home advantage in the Premier League during COVID-19." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
 
@@ -45,31 +45,30 @@
     <div class="nav-external">
       <a href="mailto:imanuellopezpaz@gmail.com" class="nav-ext-link">Email</a>
       <a href="https://www.linkedin.com/in/manuellopezpaz/" target="_blank" rel="noopener" class="nav-ext-link">LinkedIn</a>
-      <a href="resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
+      <a href="../assets/resume.pdf" target="_blank" rel="noopener" class="nav-ext-link">Resume</a>
     </div>
 
   </nav>
 
   <main>
-    <div class="notes-back-row">
-      <a href="index.html" class="notes-back-link">← <span class="notes-back-text">Back</span></a>
-    </div>
-
     <div class="writeup-layout">
+      <div class="writeup-back">
+        <a href="../index.html" class="notes-back-link">← <span class="notes-back-text">Back</span></a>
+      </div>
       <div class="writeup-main">
         <div class="project-page">
 
-          <p class="project-page-eyebrow">Premier League · 2000–2025 · Statistical Analysis</p>
           <h1 class="project-page-title">Did Crowd Absence Reduce Home Advantage?</h1>
-          <p class="project-page-subtitle">Evidence from the Premier League During COVID-19</p>
 
-          <p class="writeup-intro">9,380 Premier League matches across 25 seasons. One natural experiment: two seasons without any crowd. The question was whether removing supporters actually reduced home advantage, or whether it was always something else.</p>
+          <p class="writeup-intro">This project uses 9,380 Premier League matches across 25 seasons to test whether crowd absence during COVID-19 measurably reduced home advantage. The analysis works in two steps: OLS regression to identify what drives match outcomes normally, and Welch's t-tests to compare home advantage between COVID and normal matches directly.</p>
+
+          <img src="../images/project-crowd-absence.jpg" alt="Crowd Absence & Home Advantage — Premier League" class="writeup-banner" />
 
           <div class="article">
 
             <h2 id="intro">1. Introduction</h2>
-            <p>Home advantage is one of the most consistent patterns in sport. Across leagues, seasons, and decades, home teams win more often than visiting sides. But where does it actually come from? Familiarity with the pitch, no travel fatigue, possible referee bias — all of these have been suggested. The most intuitive explanation, though, is the crowd.</p>
-            <p>Anyone who has been to a football match knows the atmosphere is not neutral. Growing up watching River Plate in Argentina and going through the Superclásico against Boca Juniors made that obvious long before it became a question I wanted to study. The crowd does not just watch. It participates. The pressure home supporters place on visiting players is felt throughout the match, but it is most visible in moments of individual exposure: an away player standing alone to take a corner kick in front of thousands of hostile fans.</p>
+            <p>Home advantage is one of the most consistent patterns in sport. Across leagues, seasons, and decades, home teams win more often than visiting sides. But where does it actually come from? Familiarity with the pitch, no travel fatigue, possible referee bias, all of these have been suggested. The most intuitive explanation, though, is the crowd.</p>
+            <p>Anyone who has been to a football match knows the atmosphere is not neutral. Growing up watching River Plate in Argentina and going through the Superclásico against Boca Juniors made that obvious long before it became a question I wanted to study. The crowd does not just watch. It participates. The pressure home supporters place on visiting players is felt throughout the match, but it is most visible in moments of individual exposure, like an away player standing alone to take a corner kick in front of thousands of hostile fans.</p>
             <p>The problem is that it is really hard to separate the crowd's contribution from everything else. Under normal conditions, home teams play on their own pitch, with their own supporters, without the fatigue of travel, all at the same time. You would need a situation where one of those factors is removed while the others stay constant. The COVID-19 pandemic created exactly that.</p>
             <p>From June 2020 through May 2021, the Premier League was played in empty stadiums. The same teams, the same pitches, the same rules, but no crowd. If supporter presence genuinely drives home advantage, removing it should produce a measurable decline. If home advantage stays the same, other factors must be doing the work.</p>
             <p>This project uses 9,380 Premier League matches across 25 seasons from 2000/01 to 2024/25 to look at that question. The analysis works in two steps. First, an OLS regression identifies which performance indicators drive match outcomes under normal conditions. Second, Welch's t-tests compare home advantage directly between COVID and normal matches to test whether the crowd effect shows up in the results.</p>
@@ -77,79 +76,92 @@
 
             <h2 id="data">2. Data</h2>
             <p>The dataset covers 25 complete Premier League seasons from 2000/01 to 2024/25, with 9,380 matches in total. It was sourced from football-data.co.uk, a long-running repository of football statistics.</p>
-            <p>I chose the Premier League for two reasons. First, it is the most widely followed league in the world and has detailed match data going back decades, which makes it possible to study long-run patterns and the COVID disruption in the same dataset. Second, it is the league I have followed most closely since childhood as an Arsenal supporter. Anyone who has watched the Premier League knows the atmosphere is different: the crowds are loud, the stadiums are full, and the pressure on visiting teams is real. That made the research question feel personal from the start.</p>
-            <p>Each match record includes full-time and half-time results and goals, shots, shots on target, corners, fouls, and yellow and red cards for both teams. Modern football analysis has moved toward more sophisticated metrics. Possession percentages, expected goals (xG), and expected goals on target (xGOT) are now standard tools in professional clubs. Those were not available in this dataset. Shots on target was used as the main proxy for attacking quality, which is a reasonable approximation given how strongly it correlates with xG.</p>
-            <p>There were no missing values, so the cleaning was minimal. That was genuinely surprising — I expected at least some gaps in a dataset going back to 2000. The main decision was how to define the COVID period. Flagging entire seasons would have been inaccurate because the 2019/20 season had fans for most of its games before the March suspension. Instead I coded by date: matches played between 13 June 2020 and 23 May 2021 get a COVID flag of 1, everything else gets 0. The 2019/20 season finished behind closed doors from June 2020 and the 2020/21 season was played almost entirely without supporters, with a few brief exceptions in December 2020. Under this coding, 472 matches are COVID-period observations and 8,908 are normal.</p>
+            <p>I chose the Premier League for two reasons. First, it is the most widely followed league in the world and has detailed match data going back decades, which makes it possible to study long-term patterns and the COVID disruption in the same dataset. Second, it is a league I have followed closely since childhood as an Arsenal supporter. Anyone who has watched the Premier League knows the atmosphere is different: the crowds are loud, the stadiums are full, and the pressure on visiting teams is real. That made the research question feel personal from the start.</p>
+            <p>Each match record includes full-time and half-time results and goals, shots, shots on target, corners, fouls, and yellow and red cards for both teams. One thing worth noting is that modern football analysis has moved toward more sophisticated metrics. Possession percentages, expected goals (xG), and expected goals on target (xGOT) are now standard tools in professional clubs. Those were not available in this dataset. Shots on target was used as the main proxy for attacking quality, which is a reasonable approximation given how strongly it correlates with xG.</p>
+            <p>There were no missing values, so the cleaning was minimal. That was genuinely surprising. I expected at least some gaps in a dataset going back to 2000. The main decision was how to define the COVID period. Flagging entire seasons would have been inaccurate because the 2019/20 season had fans for most of its games before the March suspension. Instead I coded by date: matches played between 13 June 2020 and 23 May 2021 get a COVID flag of 1, everything else gets 0. The 2019/20 season finished behind closed doors from June 2020 and the 2020/21 season was played almost entirely without supporters, with a few brief exceptions in December 2020. Under this coding, 472 matches are COVID-period observations and 8,928 are normal. I considered flagging entire seasons instead but that would have misclassified most of 2019/20, which had fans for the majority of its matches.</p>
             <p>I also created a few extra variables for the analysis: goal difference (home goals minus away goals), a binary home win indicator, shot accuracy for both teams, and a numeric result variable where home win equals 1, draw equals 0, and away win equals −1.</p>
 
             <h2 id="method">3. Methodology</h2>
+            <p>I used two statistical approaches to answer the research question. First, OLS regression to understand which performance indicators drive match outcomes under normal conditions. Second, Welch's t-tests to compare home advantage directly between COVID and non-COVID matches.</p>
+
             <h3>3.1 Dependent and Independent Variables</h3>
             <p>For the regression I needed a variable that captures match outcome in a meaningful way. A simple win/loss indicator felt too blunt. A 4-0 win and a 1-0 win are both wins but they represent very different levels of dominance. Goal difference (home goals minus away goals) captures that distinction, so I used it as the dependent variable.</p>
-            <p>The independent variables are the performance statistics in the dataset: shots, shots on target, corners, and fouls for both teams, plus the COVID indicator. Shots on target is the closest proxy for attacking quality and it correlates strongly with xG, so I used it as the main measure of attacking threat.</p>
+            <p>The independent variables are the performance statistics in the dataset: shots, shots on target, corners, and fouls for both teams, plus the COVID indicator. Modern football analysis uses more sophisticated metrics but those were not available here. Shots on target is the closest proxy for attacking quality and it correlates strongly with xG, so I used it as the main measure of attacking threat.</p>
 
             <h3>3.2 OLS Regression</h3>
             <p>OLS regression finds the combination of coefficients that best fits the observed data. I chose it because it is straightforward to interpret and because it is the foundational tool in econometrics, which is the field I am applying to study. Each coefficient tells me how much goal difference changes when that variable goes up by one unit, holding everything else constant.</p>
-            <p>The model:</p>
-            <div class="formula-block">GoalDiff = β₀ + β₁(HomeSoT) + β₂(AwaySoT) + β₃(HomeShots) + β₄(AwayShots) + β₅(HomeCorners) + β₆(AwayCorners) + β₇(HomeFouls) + β₈(AwayFouls) + β₉(COVID) + ε</div>
-            <p>I used the 5% significance threshold (p &lt; 0.05), the standard convention in economics and social science. When I checked the regression diagnostics, I noticed a clear striping pattern in the residuals vs. fitted values plot. After looking into it, the explanation was straightforward: goals are always whole numbers. Goal difference only takes integer values, but OLS technically assumes the dependent variable is continuous. A more rigorous approach would be an ordered logistic or Poisson regression. I kept OLS here as a transparent approximation since with nearly 9,400 observations the estimates are stable, but I flag this as a limitation in Section 5.</p>
+            <p>The model I estimated is:</p>
+            <div class="formula-block">GoalDiff = β₀ + β₁(HomeShotsOnTarget) + β₂(AwayShotsOnTarget) + β₃(HomeShots) + β₄(AwayShots) + β₅(HomeCorners) + β₆(AwayCorners) + β₇(HomeFouls) + β₈(AwayFouls) + β₉(COVID) + ε</div>
+            <p>I used the 5% significance threshold (p &lt; 0.05), which is the standard convention in economics and social science. It means a result is only considered genuine if the probability of seeing it by chance is below 5%.</p>
+            <p>When I checked the regression diagnostics, I noticed a clear striping pattern in the residuals vs. fitted values plot. After looking into it, the explanation turned out to be straightforward: goals are always whole numbers. A team scores 0, 1, 2, or 3 goals, never 1.7 or 2.3. Goal difference only takes integer values, but OLS technically assumes the dependent variable is continuous. That is what creates the striping pattern you see in the diagnostics. A more rigorous approach would be an ordered logistic or Poisson regression, both designed for discrete outcomes. I kept OLS here as a transparent approximation since with nearly 9,400 observations the estimates are stable, but I flag this as a limitation in Section 5.</p>
 
             <h3>3.3 COVID Analysis</h3>
-            <p>To test whether crowd absence reduced home advantage, I compared two groups directly: matches played during the COVID period and all other matches. The obvious tool is a t-test, but the two groups are very different in size — 472 COVID matches versus 8,908 normal ones. The standard Student's t-test assumes similar variance in both groups, which is hard to justify when one group is twenty times larger. Welch's t-test relaxes that assumption and is specifically recommended for unequal group sizes.</p>
-            <p>With nearly 9,400 observations, even a very small difference can produce a statistically significant p-value — not because the effect is meaningful in practice, but just because the sample is large enough to detect almost anything. That is worth keeping in mind when reading the results: statistical significance and practical importance are not the same thing.</p>
+            <p>To test whether crowd absence reduced home advantage, I compared two groups directly: matches played during the COVID period and all other matches.</p>
+            <p>The obvious tool for comparing two group means is a t-test. But I ran into a practical problem: the two groups are very different in size, 472 COVID matches versus 8,928 normal ones. The standard t-test assumes that the variance in both groups is similar, which is hard to justify when one group is twenty times larger than the other. After looking into alternatives I found that Welch's t-test relaxes that assumption and is specifically recommended for cases with unequal group sizes. The choice was practical, not technical: it was simply the right version for what I had. I ran two tests: one comparing home win rates and one comparing average home goals per match.</p>
+            <p>One more thing I had to think about: with nearly 9,400 observations, even a very small difference between groups can produce a statistically significant p-value, not because the effect is meaningful in practice but just because the sample is large enough to detect almost anything. That is worth keeping in mind when reading the results: statistical significance and practical importance are not the same thing.</p>
 
             <h2 id="results">4. Results</h2>
+
             <h3>4.1 Home Advantage Exists</h3>
-            <p>Over 25 Premier League seasons, home teams won 45.8% of matches, drew 24.7%, and lost 29.5%. That is a consistent advantage that barely moved over two and a half decades. Figure 2 tracks home win rate season by season. The long-run average of 45.8% holds with natural variation but no real trend, until 2020/21, which has the lowest home win rate in the entire dataset at around 38%. That drop lines up exactly with the season played almost entirely without supporters.</p>
-            <p>Looking at goals over time, home teams consistently outscored away teams throughout the dataset, but the gap narrows during the COVID period. What stands out is that the decline is <strong>asymmetric</strong>: home teams scored fewer goals while away teams were relatively unaffected. That is the first visual sign that crowd absence hurt home sides specifically, not both teams equally.</p>
+            <p>Over 25 Premier League seasons, home teams won 45.8% of matches, drew 24.7%, and lost 29.5%. That is a consistent advantage that barely moved over two and a half decades. Home advantage in the Premier League is not just a feeling. It shows up consistently in the numbers.</p>
+            <p>Figure 2 tracks home win rate season by season. The long-run average of 45.8% holds with natural variation but no real trend, until 2020/21, which has the lowest home win rate in the entire dataset at around 38%. That drop lines up exactly with the season played almost entirely without supporters.</p>
 
             <figure class="article-figure">
-              <img src="figures/fig2_home_win_rate_by_season.png" alt="Home win rate by season 2000–2025" loading="lazy" />
-              <figcaption><strong>Fig 2</strong> — Home win rate by season (2000/01–2024/25). The 25-season average sits at 45.8%. The two COVID-affected seasons are highlighted. The 2020/21 season — played almost entirely without fans — recorded the lowest home win rate in the dataset.</figcaption>
+              <img src="../figures/fig2_home_win_rate_by_season.png" alt="Home win rate by season 2000–2025" loading="lazy" />
+              <figcaption>Home win rate by season (2000/01–2024/25). The 2020/21 season, played almost entirely without fans, recorded the lowest home win rate in the dataset.</figcaption>
             </figure>
 
+            <p>Figure 3 looks at goals over time. Home teams consistently outscored away teams throughout the dataset, but the gap narrows during the COVID period. What stands out is that the decline is asymmetric: home teams scored fewer goals while away teams were relatively unaffected. That is the first visual sign that crowd absence hurt home sides specifically, not both teams equally.</p>
+
             <h3>4.2 What Drives Performance Under Normal Conditions</h3>
+            <p>Before measuring what changed during COVID I needed to understand what drives match outcomes normally. The OLS regression does that job.</p>
+            <p>Figure 4 shows the correlation matrix. HomeShotsOnTarget has the strongest positive correlation with goal difference and AwayShotsOnTarget the strongest negative one. Total shots correlate much more weakly. Shot quality beats shot volume as a predictor, and that pattern runs through everything that follows.</p>
             <p>The regression explains 30.8% of the variance in goal difference (R² = 0.308). That is modest, but consistent with how unpredictable football is. Dominant teams lose matches they should win all the time, and a model without possession or xG data is not going to capture the full picture. What it does show is a clear hierarchy among the variables.</p>
-            <p><strong>Shots on target dominate.</strong> HomeShotsOnTarget has the largest positive coefficient (β = +0.251, p &lt; 0.001) and AwayShotsOnTarget the largest negative (β = −0.268, p &lt; 0.001). Every extra home shot on target adds 0.25 to goal difference and every extra away shot on target takes 0.27 away. Shot quality is the main statistical driver — not volume, not set pieces, not discipline.</p>
+            <p><strong>Shots on target dominate.</strong> HomeShotsOnTarget has the largest positive coefficient (β = +0.251, p &lt; 0.001) and AwayShotsOnTarget the largest negative (β = −0.268, p &lt; 0.001). Every extra home shot on target adds 0.25 to goal difference and every extra away shot on target takes 0.27 away. Shot quality is the main statistical driver, not volume, not set pieces, not discipline.</p>
             <p>Total shots add almost nothing once shots on target are in the model. HomeShots has a coefficient of −0.009 (p = 0.040) and AwayShots −0.004 (p = 0.438). Fouls are marginally negative for both teams, which makes sense since teams committing more fouls are usually defending under pressure.</p>
-            <p><strong>Corners gave the most surprising result.</strong> HomeCorners has a statistically significant negative coefficient (β = −0.071, p &lt; 0.001). More corners for the home team is associated with a lower goal difference, not a higher one. Once shots on target are in the model, corners no longer signal genuine attacking threat. A team winning corners but not shots on target is creating set pieces without real goalscoring danger. I expected corners to be a sign of dominance. The data disagrees.</p>
-            <p>The COVID dummy is not significant in the regression (β = −0.056, p = 0.336). This is not because crowd absence had no effect. The regression already controls for in-game performance — if having a crowd makes home teams perform better in terms of shots and corners, that effect is already absorbed by those variables. To answer whether crowd absence reduced home advantage I need a different approach: comparing outcomes across the two periods without controlling for performance. That is what the t-tests do.</p>
+            <p><strong>Corners gave the result I found most surprising.</strong> HomeCorners has a statistically significant negative coefficient (β = −0.071, p &lt; 0.001). More corners for the home team is associated with a lower goal difference, not a higher one. Once shots on target are in the model, corners no longer signal genuine attacking threat. A team winning corners but not shots on target is creating set pieces without real goalscoring danger. I expected corners to be a sign of dominance. The data disagrees.</p>
+            <p>The COVID dummy is not significant in the regression (β = −0.056, p = 0.336), which confused me at first. This is not because crowd absence had no effect. The regression already controls for in-game performance. If having a crowd makes home teams perform better in terms of shots and corners, that effect is already absorbed by those variables. The model cannot isolate the crowd's contribution directly. To answer whether crowd absence actually reduced home advantage I need a different approach: comparing outcomes across the two periods without controlling for performance. That is what the t-tests do.</p>
 
             <figure class="article-figure">
-              <img src="figures/fig5_ols_coefficients.png" alt="OLS coefficient plot" loading="lazy" />
-              <figcaption><strong>Fig 5</strong> — OLS coefficient plot. Blue bars are statistically significant (p &lt; 0.05), grey bars are not. Error bars show 95% confidence intervals. Shots on target dominate in both directions. The COVID dummy is not significant once in-game performance is controlled for.</figcaption>
+              <img src="../figures/fig5_ols_coefficients.png" alt="OLS coefficient plot" loading="lazy" />
+              <figcaption>OLS coefficient plot. Blue bars are statistically significant (p &lt; 0.05), grey bars are not. Shots on target dominate in both directions. The COVID dummy is not significant once in-game performance is controlled for.</figcaption>
             </figure>
 
             <h3>4.3 Isolating the Crowd Effect</h3>
-            <p>Home win rate fell from 46.2% in normal seasons to <strong>39.6% during COVID</strong>, a drop of 6.5 percentage points (p = 0.005). Average home goals per match dropped from 1.543 to 1.390, a reduction of 0.153 goals per match (p = 0.016). Both results confirm that home advantage measurably weakened when matches were played without supporters.</p>
-            <p>The decline is real and statistically significant, but its practical size is modest — Cohen's d is around 0.15 for both comparisons. Crowd absence reduced home advantage without eliminating it. Home teams still won more often than away teams in empty stadiums. Supporter presence is one driver of home advantage, but not the only one. Familiarity with the pitch, no travel fatigue, and possible referee effects likely all continue to operate regardless of whether fans are present.</p>
+            <p>Home win rate fell from 46.2% in normal seasons to 39.6% during COVID, a drop of 6.5 percentage points that is statistically significant (p = 0.005). Average home goals per match dropped from 1.543 to 1.390, a reduction of 0.153 goals per match (p = 0.016). Both results confirm that home advantage measurably weakened when matches were played without supporters.</p>
+            <p>The decline is real and statistically significant, but its practical size is modest. Crowd absence reduced home advantage without eliminating it. Home teams still won more often than away teams in empty stadiums. Supporter presence is one driver of home advantage, but not the only one. Familiarity with the pitch, no travel fatigue, and possible referee effects likely all continue to operate regardless of whether fans are present.</p>
+            <p>Both parts of the analysis end up telling the same story. The regression shows that shot quality is the dominant performance predictor under normal conditions. The COVID analysis shows that part of what generates the home team's edge is the crowd itself: without supporters, home teams scored less and won less. The crowd does not appear directly in the regression model, but its absence shows up clearly in the results.</p>
 
             <figure class="article-figure">
-              <img src="figures/fig6_covid_home_advantage.png" alt="COVID vs normal: home advantage comparison" loading="lazy" />
-              <figcaption><strong>Fig 6</strong> — COVID vs normal seasons: home win rate and average home goals. Bars show group means with 95% confidence intervals. Both differences are statistically significant (p &lt; 0.05).</figcaption>
+              <img src="../figures/fig6_covid_home_advantage.png" alt="COVID vs normal: home advantage comparison" loading="lazy" />
+              <figcaption>COVID vs normal seasons: home win rate and average home goals. Both differences are statistically significant (p &lt; 0.05).</figcaption>
             </figure>
 
-            <p>Both parts of the analysis tell the same story. The regression shows that shot quality is the dominant performance predictor under normal conditions. The COVID analysis shows that part of what generates the home team's edge is the crowd itself: without supporters, home teams scored less and won less. The crowd does not appear directly in the regression model, but its absence shows up clearly in the results.</p>
-
             <h2 id="limits">5. Limitations and Future Work</h2>
+
             <h3>5.1 Limitations</h3>
-            <p>The model explains 30.8% of the variance in goal difference, leaving 69.2% unexplained. That is not just a data problem — it reflects something real about football. The missing variables point to things that are genuinely hard to quantify: individual player quality on a given day, squad rotation and fatigue, tactical decisions to sit deep and absorb pressure, the context of a match, and the randomness of the sport itself. A deflection, a refereeing call, a moment of individual brilliance: none of these show up in team-level statistics but all of them affect results.</p>
-            <p>The COVID indicator, while coded by date rather than by season, still has a limitation. A small number of matches in December 2020 allowed limited crowd attendance under regional rules. Those are included as COVID matches here, which makes the comparison slightly less clean than it could be.</p>
-            <p>Finally, goal difference only takes integer values, which technically violates the OLS assumption of a continuous dependent variable. As discussed in Section 3, OLS is kept as a transparent approximation, but an ordered logistic or Poisson framework would be more rigorous.</p>
+            <p>The model explains 30.8% of the variance in goal difference, leaving 69.2% unexplained. That is not just a data problem. It reflects something real about football. The missing variables point to things that are genuinely hard to quantify: individual player quality on a given day, squad rotation and fatigue, tactical decisions to sit deep and absorb pressure, the context of a match (a title decider versus a game that means nothing), and the randomness of the sport itself. A deflection, a refereeing call, a moment of individual brilliance: none of these show up in team-level statistics but all of them affect results. Any honest analysis of football has to accept that a lot of what determines results is simply not measurable.</p>
+            <p>The COVID indicator, while coded by date rather than by season, still has a limitation. A small number of matches in December 2020 allowed limited crowd attendance under regional rules. Those are included as COVID matches here, which makes the comparison slightly less clean than it could be. A more precise coding would distinguish full-capacity, partial-capacity, and empty stadium matches separately, but that data was not available.</p>
+            <p>Finally, goal difference only takes integer values, which technically violates the OLS assumption of a continuous dependent variable. This produces the striping pattern in the diagnostics. As discussed in Section 3, OLS is kept as a transparent approximation, but an ordered logistic or Poisson framework would be more rigorous.</p>
 
             <h3>5.2 Future Work</h3>
-            <p>The most direct extension would be replicating the analysis with a dataset that includes possession, xG, and tracking data. With those variables it would be possible to ask more specific questions: do home teams press more aggressively with a crowd? Do they generate better shots, or just more of them?</p>
-            <p>A second direction comes from a pattern I noticed while exploring the data. Home win rate in 2024/25 sits at around 41%, the second lowest in the dataset and well below the 25-season average of 45.8%, with no COVID to explain it. That raises a question this analysis cannot answer: is home advantage structurally declining in modern football? One possible reason is that data-driven preparation has improved so much that visiting teams now arrive better equipped than ever.</p>
-            <p>A third observation is the spike in average goals per match during 2023/24, which hit the highest value in the 25-season dataset at around 3.27 goals per match. Whether that reflects a genuine tactical shift or a one-season anomaly is an open question.</p>
+            <p>The most direct extension would be replicating the analysis with a dataset that includes possession, xG, and tracking data. With those variables it would be possible to ask more specific questions: do home teams press more aggressively with a crowd? Do they generate better shots, or just more of them? Those questions are not answerable with this dataset but they would be with better data.</p>
+            <p>A second direction comes from a pattern I noticed while exploring the data. Home win rate in 2024/25 sits at around 41%, the second lowest in the dataset, and well below the 25-season average of 45.8%, with no COVID to explain it. That raises a question this analysis cannot answer: is home advantage structurally declining in modern football? One possible reason is that data-driven preparation has improved so much that visiting teams now arrive better equipped than ever. Testing that would require looking across multiple leagues and tracking how deeply clubs have adopted analytics.</p>
+            <p>A third observation is the spike in average goals per match during 2023/24, which hit the highest value in the 25-season dataset at around 3.27 goals per match. Whether that reflects a genuine tactical shift toward more open football, a one-season anomaly, or something specific to that year is an open question.</p>
+            <p>Finally, the 2015/16 season had a home win rate of around 41%, the lowest pre-COVID, coinciding with Leicester City's title win. Traditional large clubs underperformed at home that season while Leicester kept picking up points away. Whether that was a genuine anomaly or an early version of the structural trend visible in 2024/25 is worth investigating.</p>
 
             <h2 id="conclusion">6. Conclusion</h2>
-            <p>This project started with a question any football fan has probably wondered about: does the crowd actually matter, or is home advantage just a reflection of better performance by teams on familiar ground? The answer, based on 9,380 Premier League matches across 25 seasons, is that both things are true.</p>
-            <p>The regression showed that under normal conditions <strong>shot quality is the dominant driver</strong> of match outcomes. Shots on target for both teams have by far the largest coefficients in the model. Corners, which most people associate with attacking pressure, showed a significant negative relationship with goal difference once shots on target were controlled for. A team winning corners but not shots on target is generating set pieces without real goalscoring threat. Volume is not the same as quality.</p>
-            <p>The COVID analysis answered the main question directly. When supporters were removed between June 2020 and May 2021, home win rate fell from 46.2% to 39.6% and average home goals dropped from 1.543 to 1.390. Both drops are statistically significant. Crowd absence reduced home advantage without eliminating it. Home teams still won more in empty stadiums, which suggests supporter presence is one factor among several, not the whole explanation.</p>
+            <p>This project started with a question any football fan has probably wondered about: does the crowd actually matter, or is home advantage just a reflection of better performance by teams on familiar ground?</p>
+            <p>The answer, based on 9,380 Premier League matches across 25 seasons, is that both things are true.</p>
+            <p>The regression showed that under normal conditions shot quality is the dominant driver of match outcomes. Shots on target for both teams have by far the largest coefficients in the model. Corners, which most people associate with attacking pressure, showed a significant negative relationship with goal difference once shots on target were controlled for. That result genuinely surprised me. A team winning corners but not shots on target is generating set pieces without real goalscoring threat. Volume is not the same as quality.</p>
+            <p>The COVID analysis then answered the main question directly. When supporters were removed between June 2020 and May 2021, home win rate fell from 46.2% to 39.6% and average home goals dropped from 1.543 to 1.390. Both drops are statistically significant. Crowd absence reduced home advantage without eliminating it. Home teams still won more in empty stadiums, which suggests supporter presence is one factor among several, not the whole explanation.</p>
             <p>The model explains 30.8% of what determines goal difference. The other 69.2% is everything this data cannot capture: individual quality, tactical choices, fatigue, motivation, and the randomness of a sport decided by moments. That gap is not a failure of the model. It is just what football is.</p>
+            <p>This project started with something personal: the feeling that atmosphere in a stadium matters. It turns out it does, at least partially. The COVID pandemic disrupted everything. But for anyone trying to understand what actually drives home advantage, it produced something unusual: two seasons where the same teams played the same sport in the same stadiums, just without anyone watching.</p>
+            <p>Answering this question opened up several others. Why does home advantage seem to be declining even without a pandemic? How much of the unexplained variance could xG and possession account for? Those questions go beyond what this analysis can answer, but they are the natural next steps for anyone willing to keep looking.</p>
 
             <div class="article-refs">
               <p>football-data.co.uk. (2025). English Premier League Match Statistics, 2000/01–2024/25.</p>
-              <p>Seabold, S., &amp; Perktold, J. (2010). Statsmodels: Econometric and statistical modeling with Python. <em>Proceedings of the 9th Python in Science Conference.</em></p>
+              <p>All analysis was done in Python using pandas, statsmodels, and matplotlib.</p>
             </div>
 
           </div>
@@ -157,13 +169,14 @@
       </div>
 
       <aside class="writeup-toc">
+        <p class="toc-label">Contents</p>
         <nav class="toc-nav">
-          <a href="#intro" class="toc-link">1. Introduction</a>
-          <a href="#data" class="toc-link">2. Data</a>
-          <a href="#method" class="toc-link">3. Methodology</a>
-          <a href="#results" class="toc-link">4. Results</a>
-          <a href="#limits" class="toc-link">5. Limitations</a>
-          <a href="#conclusion" class="toc-link">6. Conclusion</a>
+          <a href="#intro" class="toc-link">Introduction</a>
+          <a href="#data" class="toc-link">Data</a>
+          <a href="#method" class="toc-link">Methodology</a>
+          <a href="#results" class="toc-link">Results</a>
+          <a href="#limits" class="toc-link">Limitations</a>
+          <a href="#conclusion" class="toc-link">Conclusion</a>
         </nav>
       </aside>
 
@@ -186,7 +199,7 @@
           </div>
           <div class="footer-contact-row">
             <span class="footer-contact-key">Info</span>
-            <a href="resume.pdf" target="_blank" rel="noopener"
+            <a href="../assets/resume.pdf" target="_blank" rel="noopener"
                class="footer-contact-link">
               CV
             </a>
@@ -208,7 +221,7 @@
 
   </footer>
 
-  <script src="js/main.js" defer></script>
+  <script src="../js/main.js" defer></script>
 
   <script>
   (function() {
@@ -231,83 +244,125 @@
   <style>
     .nav-github-center { justify-self: center; }
 
-    .notes-back-row {
-      position: fixed;
-      top: 88px;
-      left: var(--pad-h);
-      padding: 0;
-      z-index: 90;
-    }
-
-    /* ── Wide two-column layout ── */
+    /* ── Three-column layout: back | content | TOC ── */
     .writeup-layout {
       display: grid;
-      grid-template-columns: 1fr 120px;
-      gap: 48px;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 var(--pad-h) 140px;
+      grid-template-columns: 60px 1fr;
+      gap: 0 32px;
+      width: 100%;
+      padding: 0 24px 140px var(--pad-h);
+      box-sizing: border-box;
       align-items: start;
     }
-    .writeup-main { min-width: 0; }
-    .project-page { max-width: none !important; padding: 0 !important; margin: 0 !important; }
-    .article { max-width: 860px !important; margin: 0 !important; }
 
-    /* ── TOC — minimal, right-edge detail ── */
+    /* Back button column */
+    .writeup-back {
+      grid-column: 1;
+      position: fixed;
+      top: 80px;
+      left: 24px;
+    }
+    .notes-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 400;
+      color: #666;
+      text-decoration: none;
+      border: 1px solid #2a2a2a;
+      border-radius: 20px;
+      padding: 5px 12px;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .notes-back-link:hover {
+      background: #1a1a1a;
+      color: #aaa;
+    }
+
+    /* Content column */
+    .writeup-main {
+      grid-column: 2;
+      min-width: 0;
+      padding-top: 108px;
+      padding-right: 160px;
+      padding-left: 10px;
+    }
+    .project-page { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+    .article { max-width: 100% !important; margin: 0 !important; }
+
+    /* TOC column */
     .writeup-toc {
-      position: sticky;
-      top: 120px;
-      padding-top: 80px;
+      grid-column: 3;
+      position: fixed;
+      right: 40px;
+      top: 50vh;
+      transform: translateY(-50%);
+      max-width: 180px;
+    }
+    .toc-label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3a3a3a;
+      margin: 0 0 16px;
     }
     .toc-nav { display: flex; flex-direction: column; gap: 10px; }
     .toc-link {
-      font-size: 10px;
-      color: #383838;
+      font-size: 13px;
+      font-weight: 400;
+      color: #555;
       text-decoration: none;
       line-height: 1.4;
-      transition: color 0.2s;
-      letter-spacing: 0.02em;
+      transition: color 0.18s;
+      letter-spacing: 0.01em;
+      margin-bottom: 12px;
     }
-    .toc-link:hover { color: #666; }
-    .toc-link.active { color: #888; }
-    @media (max-width: 1000px) {
-      .writeup-layout { grid-template-columns: 1fr; padding: 0 var(--pad-h) 80px; }
+    .toc-link:hover { color: #999; }
+    .toc-link.active { color: #ffffff; font-weight: 500; }
+
+    @media (max-width: 900px) {
+      .writeup-layout {
+        grid-template-columns: 1fr;
+        padding: 0 var(--pad-h) 80px;
+      }
+      .writeup-back { display: none; }
+      .writeup-main { grid-column: 1; padding-top: 96px; }
       .writeup-toc { display: none; }
       .article { max-width: 100% !important; }
     }
 
-    /* ── Header ── */
-    .project-page-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #555;
-      margin-bottom: 18px;
-      margin-top: 80px;
-    }
+    /* ── Title ── */
     .project-page-title {
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 800;
-      line-height: 1.08;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.05;
       letter-spacing: -0.03em;
-      color: #ffffff !important;
-      margin-bottom: 12px;
+      color: #ffffff;
+      margin-top: 0;
+      margin-bottom: 28px;
     }
-    .project-page-subtitle {
-      font-size: 16px;
-      color: #666;
-      margin-bottom: 40px;
+
+    /* ── Banner image ── */
+    .writeup-banner {
+      display: block;
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin: 10px 0 20px;
     }
 
     /* ── Intro paragraph ── */
     .writeup-intro {
-      font-size: 19px;
-      line-height: 1.75;
+      font-size: 18px;
+      line-height: 1.8;
       color: #d8d8d8;
       margin-bottom: 56px;
       font-weight: 400;
-      max-width: 700px;
     }
 
     /* ── Article typography ── */
@@ -321,15 +376,15 @@
     .article h3 {
       font-size: 11px;
       font-weight: 600;
-      color: #555;
+      color: rgba(255,255,255,0.5);
       margin: 40px 0 12px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
     .article p {
       font-size: 16px;
-      line-height: 1.9;
-      color: #aaa !important;
+      line-height: 1.85;
+      color: #e0e0e0 !important;
       margin-bottom: 24px;
     }
     .article p strong { color: #ffffff; font-weight: 600; }
@@ -359,7 +414,7 @@
     .article-figure figcaption {
       padding: 12px 18px;
       font-size: 12px;
-      color: #444;
+      color: #666;
       line-height: 1.5;
       border-top: 1px solid #1a1a1a;
     }
@@ -372,11 +427,11 @@
     }
     .article-refs p {
       font-size: 12px;
-      color: #444;
+      color: #666;
       line-height: 1.6;
       margin-bottom: 8px;
     }
-    .article-refs-label { color: #555; }
+    .article-refs-label { color: #777; }
   </style>
 </body>
 </html>
