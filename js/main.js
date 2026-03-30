@@ -6,11 +6,7 @@
 
 'use strict';
 
-/* ── Smart Loading Screen ───────────────────────────────────
-   Only appears when page load genuinely takes time (>320ms).
-   For fast local / cached loads, it vanishes before the user
-   even notices it existed.
-   ─────────────────────────────────────────────────────────── */
+/* ── Smart Loading Screen ───────────────────────────────────*/
 (function initLoader() {
   const loader = document.getElementById('loader');
   if (!loader) return;
@@ -55,10 +51,7 @@
   }
 })();
 
-/* ── Page Transition Overlay ────────────────────────────────
-   Dark fade between internal pages — replaces the "Just a
-   moment." loader for navigation inside the site.
-   ─────────────────────────────────────────────────────────── */
+/* ── Page Transition Overlay ────────────────────────────────*/
 (function initPageTransition() {
   const overlay = document.createElement('div');
   overlay.id = 'page-transition';
@@ -96,10 +89,7 @@
   onScroll();
 })();
 
-/* ── Sliding Nav Pill Indicator ─────────────────────────────
-   A background element that glides between pill links on
-   hover, snapping back to the active page on mouse-leave.
-   ─────────────────────────────────────────────────────────── */
+/* ── Sliding Nav Pill Indicator ─────────────────────────────*/
 (function initNavIndicator() {
   const pill   = document.querySelector('.nav-pill');
   if (!pill) return;
@@ -197,6 +187,54 @@
   });
 })();
 
+/* ── Journey Horizontal Scroll ──────────────────────────────────*/
+(function initHorizontalScroll() {
+  const wrapper = document.getElementById('hScrollWrapper');
+  const track   = document.getElementById('hScrollTrack');
+  const fill    = document.getElementById('hProgressFill');
+  const hint    = document.getElementById('hScrollHint');
+  if (!wrapper || !track) return;
+
+  let overflow = 0; // px the track extends beyond viewport width
+
+  function setup() {
+    // Reset transform so measurement is accurate
+    track.style.transform = '';
+    overflow = Math.max(0, track.scrollWidth - window.innerWidth);
+    // Wrapper height = scrollable distance + 1 viewport (the sticky "pause")
+    wrapper.style.height = (overflow + window.innerHeight) + 'px';
+  }
+
+  function update() {
+    if (overflow <= 0) return;
+    const wrapperTop  = wrapper.getBoundingClientRect().top + window.scrollY;
+    const scrolled    = window.scrollY - wrapperTop;
+    const totalScroll = wrapper.offsetHeight - window.innerHeight;
+    if (scrolled < 0 || scrolled > totalScroll) return;
+
+    const progress   = scrolled / totalScroll;
+    const translateX = -(progress * overflow);
+    track.style.transform = `translateX(${translateX.toFixed(2)}px)`;
+
+    if (fill) fill.style.width = `${(progress * 100).toFixed(2)}%`;
+    if (hint) hint.classList.toggle('fade-out', scrolled > 80);
+  }
+
+  // Init after DOM is fully laid out
+  setup();
+  update();
+
+  let resizeTick = false;
+  window.addEventListener('resize', () => {
+    if (!resizeTick) {
+      resizeTick = true;
+      requestAnimationFrame(() => { setup(); update(); resizeTick = false; });
+    }
+  }, { passive: true });
+
+  window.addEventListener('scroll', update, { passive: true });
+})();
+
 /* ── Dynamic Year Badge ─────────────────────────────────────*/
 (function setYearBadge() {
   const badge = document.getElementById('year-badge');
@@ -204,15 +242,7 @@
   badge.textContent = `'${new Date().getFullYear().toString().slice(-2)}`;
 })();
 
-/* ── Journey Page — Parallax on Portrait Images ─────────────
-   Subtle Y-axis translation on [data-parallax] img-frames as
-   the user scrolls. ~20% of the element's distance from the
-   viewport centre. Only runs above 860px (skips mobile).
-
-   Architecture:
-   - IntersectionObserver  tracks which frames are visible
-   - scroll + requestAnimationFrame  drives the per-frame math
-   ─────────────────────────────────────────────────────────── */
+/* ── Journey Page — Parallax on Portrait Images ─────────────*/
 (function initJourneyParallax() {
   // Skip on narrow viewports (mobile/tablet)
   if (window.innerWidth <= 860) return;
@@ -268,60 +298,3 @@
   requestAnimationFrame(tick);
 })();
 
-/* ── Journey Horizontal Scroll ──────────────────────────────────
-   Converts vertical scroll into horizontal translateX movement
-   while the wrapper section is in view.
-
-   Flow:
-   1. setup()  — measures track.scrollWidth, sets wrapper height
-      so the OS scroll bar reflects the total "scrollable" distance
-   2. update() — called on every scroll event; computes progress
-      (0→1) between wrapper top and wrapper bottom, then drives
-      track.style.transform and the progress fill bar
-   ─────────────────────────────────────────────────────────────── */
-(function initHorizontalScroll() {
-  const wrapper = document.getElementById('hScrollWrapper');
-  const track   = document.getElementById('hScrollTrack');
-  const fill    = document.getElementById('hProgressFill');
-  const hint    = document.getElementById('hScrollHint');
-  if (!wrapper || !track) return;
-
-  let overflow = 0; // px the track extends beyond viewport width
-
-  function setup() {
-    // Reset transform so measurement is accurate
-    track.style.transform = '';
-    overflow = Math.max(0, track.scrollWidth - window.innerWidth);
-    // Wrapper height = scrollable distance + 1 viewport (the sticky "pause")
-    wrapper.style.height = (overflow + window.innerHeight) + 'px';
-  }
-
-  function update() {
-    if (overflow <= 0) return;
-    const wrapperTop  = wrapper.getBoundingClientRect().top + window.scrollY;
-    const scrolled    = window.scrollY - wrapperTop;
-    const totalScroll = wrapper.offsetHeight - window.innerHeight;
-    if (scrolled < 0 || scrolled > totalScroll) return;
-
-    const progress   = scrolled / totalScroll;
-    const translateX = -(progress * overflow);
-    track.style.transform = `translateX(${translateX.toFixed(2)}px)`;
-
-    if (fill) fill.style.width = `${(progress * 100).toFixed(2)}%`;
-    if (hint) hint.classList.toggle('fade-out', scrolled > 80);
-  }
-
-  // Init after DOM is fully laid out
-  setup();
-  update();
-
-  let resizeTick = false;
-  window.addEventListener('resize', () => {
-    if (!resizeTick) {
-      resizeTick = true;
-      requestAnimationFrame(() => { setup(); update(); resizeTick = false; });
-    }
-  }, { passive: true });
-
-  window.addEventListener('scroll', update, { passive: true });
-})();
