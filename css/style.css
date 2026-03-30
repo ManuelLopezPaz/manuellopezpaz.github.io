@@ -16,11 +16,11 @@
   --text:        #ffffff;
   --text-soft:   #d0d0d0;
   --text-muted:  #ffffff;
-  --text-dim:    #444;
+  --text-dim:    #e8e8e8;
   --accent:      #f0f0f0;
 
-  --font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-  --font-serif:  ui-serif, 'New York', Georgia, 'Times New Roman', serif;
+  --font-sans:   'Inter', system-ui, sans-serif;
+  --font-serif:  'Instrument Serif', Georgia, serif;
 
   --ease:        cubic-bezier(0.4, 0, 0.2, 1);
   --ease-out:    cubic-bezier(0, 0, 0.2, 1);
@@ -43,6 +43,7 @@
 html  { scroll-behavior: smooth; font-size: 16px; scroll-snap-type: y proximity; }
 body  {
   font-family: var(--font-sans);
+  font-weight: 400;
   background:  var(--bg);
   color:       var(--text);
   line-height: 1.6;
@@ -51,9 +52,12 @@ body  {
   -moz-osx-font-smoothing: grayscale;
 }
 a     { text-decoration: none; color: inherit; }
-img   { display: block; max-width: 100%; }
+img   { display: block; max-width: 100%; border-radius: 12px; }
 ul, ol { list-style: none; }
 button { cursor: pointer; border: none; background: none; font: inherit; }
+h1 { font-weight: 700; color: #ffffff; }
+h2 { font-weight: 700; color: #ffffff; }
+h3 { font-weight: 600; color: #ffffff; }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar          { width: 4px; }
@@ -149,7 +153,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* Col 1 — Name */
 .nav-brand {
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   color: #ffffff;      /* must be pure white for difference blend */
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -165,7 +169,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .nav-meta-line {
   font-size: 11.5px;
-  font-weight: 400;
+  font-weight: 500;
   color: #ffffff;
   opacity: 1;
   line-height: 1.3;
@@ -222,7 +226,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .nav-ext-link {
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   color: #ffffff;      /* pure white — difference blend handles contrast */
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -546,7 +550,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .article-row-thumb {
   width: 128px;
   height: 88px;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   flex-shrink: 0;
   background: #1a1a1a;
@@ -1817,7 +1821,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── Project image card ── */
 .project-visual {
   margin: 0 var(--pad-h);
-  border-radius: 20px;
+  border-radius: 12px;
   overflow: hidden;
   background: #0d0d0d;
 }
@@ -2173,17 +2177,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   display: block;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   HORIZONTAL SCROLL — JOURNEY (legacy, kept for journey.html)
-   ═══════════════════════════════════════════════════════════════ */
+/* ── Horizontal Scroll — Journey ─────────────────────────── */
 
-/* Outer wrapper — JS sets height to create vertical scroll distance */
 .h-scroll-wrapper {
   position: relative;
-  /* height injected by JS on DOMContentLoaded */
 }
 
-/* Sticky container — stays fixed in viewport during h-scroll phase */
 .h-scroll-sticky {
   position: sticky;
   top: 0;
@@ -2191,7 +2190,6 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   overflow: hidden;
 }
 
-/* Thin progress line at very bottom */
 .h-progress-bar {
   position: absolute;
   bottom: 0;
@@ -2428,25 +2426,35 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.28);
+  color: rgba(255,255,255,0.6);
   font-weight: 500;
   font-family: var(--font-sans);
 }
 
-/* ── Main text — small, editorial, Apple system font ── */
+/* ── Main text — small, editorial, Inter ── */
 .journey-slide-text {
   font-size: clamp(13px, 1.1vw, 16px);
   font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.72);
+  color: #e8e8e8;
   font-family: var(--font-sans);
+}
+
+/* ── Journey — large statement / quote text (Instrument Serif) ── */
+.journey-statement {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 400;
+  line-height: 1.3;
+  color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 /* ── Portrait image — dominant, tall ── */
 .journey-slide-img {
   width: 100%;
-  height: clamp(380px, 72vh, 680px);  /* 70–80% of viewport height */
+  height: clamp(380px, 72vh, 680px);
   border-radius: 16px;
   background: #111;
   border: 1px solid rgba(255,255,255,0.05);
