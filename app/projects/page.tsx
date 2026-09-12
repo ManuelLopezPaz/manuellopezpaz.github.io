@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { MatePredictorWidget } from "@/components/MatePredictorWidget";
-import { NowPlayingWidget } from "@/components/NowPlayingWidget";
 import { ProjectsSection } from "@/components/ProjectsSection";
 
 export default function ProjectsPage() {
@@ -16,7 +15,6 @@ export default function ProjectsPage() {
       </div>
       <ProjectsSection />
       <MatePredictorWidget />
-      <NowPlayingWidget />
     </main>
   );
 }

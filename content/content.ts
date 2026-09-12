@@ -22,12 +22,14 @@ export const institutionBadges: BadgeItem[] = [
   },
 ];
 
-export const uadeBadge: BadgeItem = {
-  id: "uade",
-  label: "UADE",
-  href: "https://www.uade.edu.ar/facultad-de-ciencias-economicas/doble-titulacion-en-administracion-de-empresas-y-comercio-internacional/plan-de-estudios/",
-  imageSrc: "/logos/uade.jpg",
-};
+export const associationBadges: BadgeItem[] = [
+  {
+    id: "kraket",
+    label: "Kraket",
+    href: "https://kraket.nl/en",
+    imageSrc: "/logos/kraket.png",
+  },
+];
 
 export const heroIntro = {
   before: "I am an Econometrics & Operations Research student at",
@@ -74,8 +76,7 @@ export const meParagraphs = {
   workBefore: "I've worked across",
   workAfter: "motorsport event operations, data volunteering, and a student-run health initiative.",
   projectsLabel: "My latest projects:",
-  studyingBefore: "I'm studying EOR at VU Amsterdam, previously Business Administration & International Trade at",
-  studyingAfter: ". Off the clock: a football fan, always down for a stubborn round of truco or Catan.",
+  activeMemberLabel: "Active member of:",
 };
 
 export const projects: Project[] = [
@@ -153,8 +154,6 @@ export const socials: SocialItem[] = [
   { id: "x", label: "X / Twitter", href: "https://x.com/manulopezpaz", icon: XIcon },
   { id: "email", label: "Email", href: `mailto:${email}`, icon: Mail },
 ];
-
-export const spotifyProfileUrl = "https://open.spotify.com/user/lpmanuriver";
 
 export const closingCopy = {
   heading: "Want to say hi?",

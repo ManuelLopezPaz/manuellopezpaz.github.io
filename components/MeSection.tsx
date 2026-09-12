@@ -3,10 +3,10 @@
 import { Badge } from "@/components/Badge";
 import { Section } from "@/components/layout/Section";
 import {
+  associationBadges,
   experienceBadges,
   meParagraphs,
   projectBadges,
-  uadeBadge,
 } from "@/content/content";
 
 export function MeSection() {
@@ -34,12 +34,12 @@ export function MeSection() {
       </p>
 
       <p className="text-lg leading-relaxed text-foreground-muted">
-        {meParagraphs.studyingBefore}{" "}
-        <span className="inline-flex items-center align-middle">
-          <Badge {...uadeBadge} size="sm" />
-        </span>{" "}
-        <span className="font-medium text-foreground">UADE</span>
-        {meParagraphs.studyingAfter}
+        {meParagraphs.activeMemberLabel}{" "}
+        <span className="inline-flex items-center -space-x-1 align-middle">
+          {associationBadges.map((badge) => (
+            <Badge key={badge.id} {...badge} size="sm" />
+          ))}
+        </span>
       </p>
     </Section>
   );

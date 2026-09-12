@@ -1,7 +1,6 @@
 import { Hero } from "@/components/Hero";
 import { MatePredictorWidget } from "@/components/MatePredictorWidget";
 import { MeSection } from "@/components/MeSection";
-import { NowPlayingWidget } from "@/components/NowPlayingWidget";
 import { SocialsSection } from "@/components/SocialsSection";
 
 export default function Home() {
@@ -11,7 +10,6 @@ export default function Home() {
       <MeSection />
       <SocialsSection />
       <MatePredictorWidget />
-      <NowPlayingWidget />
     </main>
   );
 }
